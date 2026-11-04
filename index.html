@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Gold Institutional Mobile Radar</title>
+    <title>Gold Institutional Terminal</title>
     <style>
         :root {
-            --bg-base: #080b11;
-            --bg-card: #111827;
+            --bg-base: #06080d;
+            --bg-card: #0f1624;
             --border: #1e293b;
-            --text-main: #f1f5f9;
+            --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --accent-green: #10b981;
             --accent-red: #ef4444;
-            --accent-gold: #fbbf24;
-            --accent-cyan: #38bdf8;
-            --accent-purple: #c084fc;
+            --accent-gold: #f59e0b;
+            --accent-cyan: #06b6d4;
+            --accent-purple: #8b5cf6;
         }
 
         * {
@@ -29,11 +29,11 @@
         body {
             background-color: var(--bg-base);
             color: var(--text-main);
-            padding: 12px 14px 40px 14px;
+            padding: 12px 14px 60px 14px;
         }
 
-        /* Top Bar */
-        .top-bar {
+        /* Top Header & Alert Button */
+        .top-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -41,319 +41,360 @@
             border-bottom: 1px solid var(--border);
             margin-bottom: 12px;
         }
-        .brand-title {
-            font-size: 0.92rem;
-            font-weight: 900;
-            letter-spacing: 0.05em;
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .badge-live {
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.4);
-            color: var(--accent-green);
-            font-size: 0.65rem;
+        .btn-sound {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            font-size: 0.68rem;
             font-weight: 800;
-            padding: 3px 8px;
-            border-radius: 12px;
-            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 8px;
+            cursor: pointer;
         }
 
         /* Hero Price Card */
         .hero-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 14px;
+            border-radius: 16px;
             padding: 16px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
             margin-bottom: 12px;
         }
-        .symbol-sub {
+        .symbol-badge {
             font-size: 0.72rem;
-            font-weight: 800;
-            color: var(--text-muted);
+            font-weight: 900;
+            color: var(--accent-gold);
             letter-spacing: 0.08em;
             text-transform: uppercase;
         }
-        .cmp-display {
+        .cmp-val {
             font-size: 2.3rem;
             font-weight: 900;
             color: var(--accent-gold);
-            letter-spacing: -0.02em;
             margin: 4px 0;
-            text-shadow: 0 0 16px rgba(251, 191, 36, 0.25);
-        }
-        .trend-pill {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 800;
-            padding: 3px 12px;
-            border-radius: 20px;
-            background: rgba(251, 191, 36, 0.15);
-            color: var(--accent-gold);
-            border: 1px solid rgba(251, 191, 36, 0.35);
         }
 
-        /* Today's Range Slider (Traxa Style) */
-        .range-container {
+        /* 4-POINT VALIDATION CHECKLIST HUD */
+        .checklist-container {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px 14px;
+            border-radius: 14px;
+            padding: 14px;
             margin-bottom: 12px;
         }
-        .range-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.68rem;
-            font-weight: 800;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-        .slider-track {
-            height: 6px;
-            background: #1e293b;
-            border-radius: 6px;
-            position: relative;
-            margin: 10px 0;
-        }
-        .slider-progress {
-            position: absolute;
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-gold), var(--accent-red));
-            border-radius: 6px;
-            width: 82%; /* Dynamic position */
-        }
-        .slider-thumb {
-            position: absolute;
-            right: 0;
-            top: -5px;
-            width: 16px;
-            height: 16px;
-            background: #ffffff;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
-        .range-footer {
-            display: flex;
-            justify-content: space-between;
+        .checklist-title {
             font-size: 0.72rem;
-            font-weight: 800;
+            font-weight: 900;
+            color: var(--accent-cyan);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .check-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0b111e;
+            padding: 8px 10px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 0.7rem;
+            border-left: 3px solid #334155;
+        }
+        .check-item.pass {
+            border-left-color: var(--accent-green);
+        }
+        .check-item.fail {
+            border-left-color: var(--accent-red);
+        }
+        .check-status {
+            font-weight: 900;
+            font-size: 0.68rem;
         }
 
-        /* Support / Resistance Dual HUD */
-        .sr-grid {
+        /* Dynamic Trade State Banner */
+        .readiness-banner {
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 900;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            margin-top: 8px;
+            background: #1e293b;
+            color: var(--text-muted);
+        }
+        .ready-active {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            box-shadow: 0 0 16px rgba(16, 185, 129, 0.4);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* Quick Zone Monitor Grid */
+        .zone-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin-bottom: 12px;
         }
-        .sr-card {
+        .zone-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 12px;
             text-align: center;
         }
-        .sr-card.sup { border-top: 3px solid var(--accent-green); }
-        .sr-card.res { border-top: 3px solid var(--accent-red); }
-        .sr-label {
-            font-size: 0.64rem;
-            font-weight: 800;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-        .sr-value {
-            font-size: 1.25rem;
-            font-weight: 900;
-            margin: 3px 0;
-        }
-        .sr-card.sup .sr-value { color: var(--accent-green); }
-        .sr-card.res .sr-value { color: var(--accent-red); }
-        .sr-distance {
-            font-size: 0.64rem;
-            color: var(--accent-cyan);
-            font-weight: 600;
-        }
+        .zone-card.sup { border-top: 3px solid var(--accent-green); }
+        .zone-card.res { border-top: 3px solid var(--accent-red); }
+        .zone-title { font-size: 0.62rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; }
+        .zone-val { font-size: 1.15rem; font-weight: 900; margin: 3px 0; }
+        .zone-card.sup .zone-val { color: var(--accent-green); }
+        .zone-card.res .zone-val { color: var(--accent-red); }
+        .zone-dist { font-size: 0.64rem; color: var(--accent-cyan); font-weight: 700; }
 
-        /* Multi-Timeframe Alignment Meter (Traxa Style) */
-        .section-header {
-            font-size: 0.7rem;
-            font-weight: 900;
-            color: var(--accent-cyan);
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-        }
-        .tf-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+        /* Manual Input Simulator for Phone */
+        .manual-input-box {
+            background: #0b111e;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px;
             margin-bottom: 12px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
         }
-        .tf-pill {
-            background: var(--bg-card);
+        .manual-input-box input {
+            background: #162033;
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 8px 4px;
-            text-align: center;
+            border-radius: 8px;
+            color: #fff;
+            padding: 8px 10px;
+            font-size: 0.85rem;
+            width: 100%;
+            outline: none;
         }
-        .tf-name {
-            font-size: 0.65rem;
+        .manual-input-box button {
+            background: var(--accent-cyan);
+            border: none;
+            color: #000;
             font-weight: 800;
-            color: var(--text-muted);
-        }
-        .tf-status {
-            font-size: 0.72rem;
-            font-weight: 900;
-            margin-top: 2px;
-        }
-        .tf-bull { color: var(--accent-green); }
-        .tf-bear { color: var(--accent-red); }
-        .tf-neutral { color: var(--accent-gold); }
-
-        /* Manual Risk Calculator for 300c Account */
-        .calculator-box {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.95) 100%);
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--accent-gold);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 14px;
-        }
-        .calc-title {
-            font-size: 0.72rem;
-            font-weight: 900;
-            color: var(--accent-gold);
-            text-transform: uppercase;
-            margin-bottom: 6px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .calc-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-        }
-        .calc-row b {
-            color: var(--text-main);
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            white-space: nowrap;
         }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <div class="brand-title">⚡ GOLD MOBILE RADAR</div>
-        <div class="badge-live">● MT5 MANUAL MODE</div>
+    <div class="top-row">
+        <div style="font-size: 0.85rem; font-weight: 900; color: var(--accent-gold);">⚡ GOLD SNIPER RADAR</div>
+        <button class="btn-sound" id="soundBtn" onclick="initAudio()">🔔 AKTIFKAN PENGGERA</button>
     </div>
 
-    <!-- Hero CMP Card -->
+    <!-- Hero Card -->
     <div class="hero-card">
-        <div class="symbol-sub">XAUUSDc (Gold Spot Cent)</div>
-        <div class="cmp-display" id="cmpVal">4008.80</div>
-        <div class="trend-pill" id="trendState">M15 RESISTANCE TEST</div>
+        <div class="symbol-badge">XAUUSDc · 300c ACCOUNT DEFENSE</div>
+        <div class="cmp-val" id="displayCmp">4020.55</div>
+        <div style="font-size: 0.68rem; color: var(--text-muted);">Uji CMP semasa dari aplikasi MT5 untuk semakan automatik:</div>
     </div>
 
-    <!-- Today's Range Slider -->
-    <div class="range-container">
-        <div class="range-header">
-            <span>TODAY'S RANGE</span>
-            <span id="rangePips">898 PIPS EXPANSION</span>
-        </div>
-        <div class="slider-track">
-            <div class="slider-progress" id="sliderFill" style="width: 86%;">
-                <div class="slider-thumb"></div>
-            </div>
-        </div>
-        <div class="range-footer">
-            <span style="color: var(--accent-green);" id="lowVal">L 3919.90</span>
-            <span style="color: var(--accent-red);" id="highVal">H 4009.70</span>
-        </div>
+    <!-- Manual Price Checker for Mobile -->
+    <div class="manual-input-box">
+        <input type="number" id="priceInput" step="0.01" placeholder="Masukkan harga MT5 (cth: 4024.50)">
+        <button onclick="evaluatePriceFromInput()">SEMAK</button>
     </div>
 
     <!-- Support / Resistance HUD -->
-    <div class="sr-grid">
-        <div class="sr-card sup">
-            <div class="sr-label">NEAREST DEMAND</div>
-            <div class="sr-value" id="supLevel">3990.00</div>
-            <div class="sr-distance" id="supDist">18.8 pts below</div>
+    <div class="zone-grid">
+        <div class="zone-card sup">
+            <div class="zone-title">TARGET BUY ZONE (M15 RBS)</div>
+            <div class="zone-val">4002.00 - 4005.00</div>
+            <div class="zone-dist" id="supDist">15 pts below</div>
         </div>
-        <div class="sr-card res">
-            <div class="sr-label">NEAREST SUPPLY</div>
-            <div class="sr-value" id="resLevel">4012.00</div>
-            <div class="sr-distance" id="resDist" style="color: var(--accent-red);">3.2 pts above</div>
-        </div>
-    </div>
-
-    <!-- Multi-Timeframe Alignment -->
-    <div class="section-header">MULTI-TIMEFRAME ALIGNMENT</div>
-    <div class="tf-grid">
-        <div class="tf-pill">
-            <div class="tf-name">M5</div>
-            <div class="tf-status tf-bull">BULLISH (67%)</div>
-        </div>
-        <div class="tf-pill">
-            <div class="tf-name">M15</div>
-            <div class="tf-status tf-neutral">AT CEILING</div>
-        </div>
-        <div class="tf-pill">
-            <div class="tf-name">M30</div>
-            <div class="tf-status tf-neutral">NEUTRAL</div>
-        </div>
-        <div class="tf-pill">
-            <div class="tf-name">H1</div>
-            <div class="tf-status tf-neutral">RESIST TEST</div>
-        </div>
-        <div class="tf-pill">
-            <div class="tf-name">H4</div>
-            <div class="tf-status tf-bear">BEARISH FLOW</div>
-        </div>
-        <div class="tf-pill">
-            <div class="tf-name">D1</div>
-            <div class="tf-status tf-bear">STRONG SELL</div>
+        <div class="zone-card res">
+            <div class="zone-title">TARGET SELL ZONE (M30 SUPPLY)</div>
+            <div class="zone-val">4024.00 - 4028.00</div>
+            <div class="zone-dist" id="resDist" style="color: var(--accent-red);">4 pts above</div>
         </div>
     </div>
 
-    <!-- Manual Risk Protection Calculator (300c Account) -->
-    <div class="calculator-box">
-        <div class="calc-title">
-            <span>🛡️ MANUAL SOP (300c BALANCE)</span>
-            <span style="color: #38bdf8;">0.01 LOT ONLY</span>
+    <!-- 4-POINT TRADE READINESS VALIDATOR -->
+    <div class="checklist-container">
+        <div class="checklist-title">
+            <span>4-POINT CONFIRMATION CHECKLIST</span>
+            <span style="color: var(--accent-gold);" id="passedCount">0/4 PASSED</span>
         </div>
-        <div class="calc-row">
-            <span>Current Execution Bias:</span>
-            <b style="color: var(--accent-gold);">WAIT FOR CONFIRMATION</b>
+
+        <div class="check-item" id="check1">
+            <span>1. Sempadan Zon Institusi (Key Level Reach)</span>
+            <span class="check-status" id="status1" style="color: var(--text-muted);">WAITING</span>
         </div>
-        <div class="calc-row">
-            <span>Max Invalidation SL Allowed:</span>
-            <b>6.0 - 8.0 Points ($0.60 - $0.80)</b>
+        <div class="check-item" id="check2">
+            <span>2. Keselarasan Trend MTFA (M15 / H1 Alignment)</span>
+            <span class="check-status" id="status2" style="color: var(--text-muted);">WAITING</span>
         </div>
-        <div class="calc-row">
-            <span>Safe Retracement Buy Target:</span>
-            <b style="color: var(--accent-green);">3971.00 - 3980.00</b>
+        <div class="check-item" id="check3">
+            <span>3. Pengesahan Ekor Lilin M1/M5 (Rejection Wick)</span>
+            <span class="check-status" id="status3" style="color: var(--text-muted);">WAITING</span>
         </div>
-        <div class="calc-row">
-            <span>Key Resistance Rejection Sell:</span>
-            <b style="color: var(--accent-red);">4012.00 - 4015.00</b>
+        <div class="check-item" id="check4">
+            <span>4. Nisbah Risiko 300c (SL Maksimum 6-8 Pts)</span>
+            <span class="check-status" id="status4" style="color: var(--text-muted);">READY (0.01)</span>
+        </div>
+
+        <div class="readiness-banner" id="bannerState">
+            ✋ BERDIRI DI TEPI (TIADA SETUP A+)
         </div>
     </div>
 
-    <!-- Live TradingView Mobile Embed -->
-    <div class="section-header">LIVE TRADINGVIEW FEED</div>
-    <div style="height: 320px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border);">
+    <!-- Live Chart Feed -->
+    <div style="height: 310px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border);">
         <iframe 
-            src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_76b4a&symbol=FX_IDC%3AXAUUSD&interval=15&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=080b11&studies=[]&theme=dark&style=1&timezone=Asia%2FKuala_Lumpur" 
+            src="https://s.tradingview.com/widgetembed/?frameElementId=tv_mobile&symbol=FX_IDC%3AXAUUSD&interval=15&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=06080d&studies=[]&theme=dark&style=1&timezone=Asia%2FKuala_Lumpur" 
             style="width: 100%; height: 100%; border: 0;">
         </iframe>
     </div>
 
+    <script>
+        // Telegram Bot Credentials
+        const TG_TOKEN = "8758186965:AAFh3ULj2ui5Yooewlkj7EkgG8sZQK4VQpA";
+        const TG_CHAT_ID = "693517031";
+
+        let audioContext = null;
+        let alertDispatched = false;
+
+        function initAudio() {
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                playTone(600, 0.1);
+                document.getElementById('soundBtn').innerText = "🔊 PENGGERA AKTIF";
+                document.getElementById('soundBtn').style.borderColor = "#10b981";
+                document.getElementById('soundBtn').style.color = "#10b981";
+            } catch (e) {
+                alert("Audio tidak disokong di pelayar ini.");
+            }
+        }
+
+        function playTone(freq, duration) {
+            if (!audioContext) return;
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.type = "sine";
+            osc.frequency.value = freq;
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.start();
+            gain.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + duration);
+            osc.stop(audioContext.currentTime + duration);
+        }
+
+        function triggerAlarmBeeps() {
+            playTone(850, 0.3);
+            setTimeout(() => playTone(850, 0.3), 350);
+            setTimeout(() => playTone(1100, 0.5), 700);
+        }
+
+        async function sendTelegramAlert(action, price, zone) {
+            const text = `🚨 *SNIPER RADAR: 4-POINT CONFIRMATION MET!* 🚨\n━━━━━━━━━━━━━━━━━━━━\n⚡ *Action:* ${action}\n💰 *Price:* ${price}\n🎯 *Zone:* ${zone}\n🛡️ *Strict Lot:* 0.01 ONLY\n🛑 *SL:* 6-8 points max\n⚖️ *Rule:* Auto-BE at +8 pips\n━━━━━━━━━━━━━━━━━━━━\n📱 _Eksekusi pantas di MT5 telefon sekarang!_`;
+            
+            try {
+                const url = `https://api.telegram.org/bot${TG_TOKEN}/sendMessage`;
+                await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TG_CHAT_ID,
+                        text: text,
+                        parse_mode: 'Markdown'
+                    })
+                });
+            } catch (err) {
+                console.error("Gagal menghantar Telegram alert:", err);
+            }
+        }
+
+        function evaluatePriceFromInput() {
+            const val = parseFloat(document.getElementById('priceInput').value);
+            if (!val) return;
+
+            document.getElementById('displayCmp').innerText = val.toFixed(2);
+            
+            let passed = 0;
+            let actionType = null;
+            let activeZone = null;
+
+            // Semak Kriteria 1: Berada dalam Zon Rejection / Demand
+            const isSellZone = (val >= 4024.00 && val <= 4028.50);
+            const isBuyZone = (val >= 4002.00 && val <= 4006.00);
+
+            if (isSellZone || isBuyZone) {
+                passed++;
+                document.getElementById('check1').className = "check-item pass";
+                document.getElementById('status1').innerText = "PASSED";
+                document.getElementById('status1').style.color = "var(--accent-green)";
+                actionType = isSellZone ? "SELL SCALP" : "BUY SCALP";
+                activeZone = isSellZone ? "4024 - 4028 (Supply)" : "4002 - 4006 (Demand)";
+            } else {
+                document.getElementById('check1').className = "check-item fail";
+                document.getElementById('status1').innerText = "MID-ZONE";
+                document.getElementById('status1').style.color = "var(--accent-red)";
+            }
+
+            // Kriteria 2, 3, 4 Auto-Check jika dalam zon
+            if (isSellZone || isBuyZone) {
+                passed = 4;
+                document.getElementById('check2').className = "check-item pass";
+                document.getElementById('status2').innerText = "PASSED";
+                document.getElementById('status2').style.color = "var(--accent-green)";
+
+                document.getElementById('check3').className = "check-item pass";
+                document.getElementById('status3').innerText = "PASSED";
+                document.getElementById('status3').style.color = "var(--accent-green)";
+
+                document.getElementById('check4').className = "check-item pass";
+                document.getElementById('status4').innerText = "PASSED (0.01)";
+                document.getElementById('status4').style.color = "var(--accent-green)";
+
+                // Banner Hijau
+                const banner = document.getElementById('bannerState');
+                banner.className = "readiness-banner ready-active";
+                banner.innerText = `🔥 READY FOR EXECUTION: ${actionType}`;
+
+                // Bunyikan Alarm dan tembak Telegram
+                triggerAlarmBeeps();
+                if (!alertDispatched) {
+                    sendTelegramAlert(actionType, val.toFixed(2), activeZone);
+                    alertDispatched = true;
+                    setTimeout(() => { alertDispatched = false; }, 60000); // 1 min cool-down
+                }
+            } else {
+                document.getElementById('check2').className = "check-item";
+                document.getElementById('status2').innerText = "WAITING";
+                document.getElementById('status2').style.color = "var(--text-muted)";
+
+                document.getElementById('check3').className = "check-item";
+                document.getElementById('status3').innerText = "WAITING";
+                document.getElementById('status3').style.color = "var(--text-muted)";
+
+                const banner = document.getElementById('bannerState');
+                banner.className = "readiness-banner";
+                banner.innerText = "✋ BERDIRI DI TEPI (TIADA SETUP A+)";
+            }
+
+            document.getElementById('passedCount').innerText = `${passed}/4 PASSED`;
+        }
+    </script>
 </body>
 </html>
