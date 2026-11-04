@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Gold Institutional Terminal</title>
+    <title>XAUUSD Institutional Radar Terminal</title>
     <style>
         :root {
             --bg-base: #06080d;
@@ -32,7 +32,7 @@
             padding: 12px 14px 60px 14px;
         }
 
-        /* Top Header & Alert Button */
+        /* Top Header */
         .top-row {
             display: flex;
             justify-content: space-between;
@@ -41,18 +41,44 @@
             border-bottom: 1px solid var(--border);
             margin-bottom: 12px;
         }
-        .btn-sound {
-            background: rgba(56, 189, 248, 0.15);
+        .live-status-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.12);
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-green);
+            animation: pulse-live 1.2s infinite;
+        }
+        @keyframes pulse-live {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.6; }
+        }
+
+        .btn-audio {
+            background: rgba(6, 182, 212, 0.12);
             border: 1px solid var(--accent-cyan);
             color: var(--accent-cyan);
             font-size: 0.68rem;
             font-weight: 800;
-            padding: 4px 10px;
+            padding: 5px 12px;
             border-radius: 8px;
             cursor: pointer;
         }
 
-        /* Hero Price Card */
+        /* Hero Live Price Card */
         .hero-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -61,8 +87,9 @@
             text-align: center;
             box-shadow: 0 8px 24px rgba(0,0,0,0.5);
             margin-bottom: 12px;
+            position: relative;
         }
-        .symbol-badge {
+        .symbol-sub {
             font-size: 0.72rem;
             font-weight: 900;
             color: var(--accent-gold);
@@ -70,13 +97,92 @@
             text-transform: uppercase;
         }
         .cmp-val {
-            font-size: 2.3rem;
+            font-size: 2.5rem;
             font-weight: 900;
             color: var(--accent-gold);
             margin: 4px 0;
+            transition: color 0.3s ease;
+        }
+        .cmp-tick-up { color: var(--accent-green) !important; text-shadow: 0 0 16px rgba(16, 185, 129, 0.4); }
+        .cmp-tick-down { color: var(--accent-red) !important; text-shadow: 0 0 16px rgba(239, 68, 68, 0.4); }
+        
+        .market-badge {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 800;
+            padding: 3px 12px;
+            border-radius: 20px;
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-gold);
+            border: 1px solid rgba(245, 158, 11, 0.35);
         }
 
-        /* 4-POINT VALIDATION CHECKLIST HUD */
+        /* Today's Range */
+        .range-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+        }
+        .range-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.66rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .slider-track {
+            height: 6px;
+            background: #1e293b;
+            border-radius: 6px;
+            position: relative;
+            margin: 8px 0;
+        }
+        .slider-fill {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-gold), var(--accent-red));
+            border-radius: 6px;
+            width: 50%;
+            transition: width 0.4s ease;
+        }
+        .slider-dot {
+            position: absolute;
+            right: 0;
+            top: -5px;
+            width: 16px;
+            height: 16px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255,255,255,0.8);
+        }
+
+        /* Support / Resistance Dynamic Distance HUD */
+        .sr-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .sr-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+        }
+        .sr-card.sup { border-top: 3px solid var(--accent-green); }
+        .sr-card.res { border-top: 3px solid var(--accent-red); }
+        .sr-label { font-size: 0.62rem; font-weight: 800; color: var(--text-muted); }
+        .sr-val { font-size: 1.15rem; font-weight: 900; margin: 3px 0; }
+        .sr-card.sup .sr-val { color: var(--accent-green); }
+        .sr-card.res .sr-val { color: var(--accent-red); }
+        .sr-dist { font-size: 0.64rem; font-weight: 700; color: var(--accent-cyan); }
+
+        /* 4-POINT VALIDATION CHECKLIST */
         .checklist-container {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -84,15 +190,16 @@
             padding: 14px;
             margin-bottom: 12px;
         }
-        .checklist-title {
+        .checklist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 0.72rem;
             font-weight: 900;
             color: var(--accent-cyan);
             letter-spacing: 0.06em;
             text-transform: uppercase;
             margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
         }
         .check-item {
             display: flex;
@@ -104,297 +211,360 @@
             margin-bottom: 6px;
             font-size: 0.7rem;
             border-left: 3px solid #334155;
+            transition: all 0.3s ease;
         }
-        .check-item.pass {
-            border-left-color: var(--accent-green);
-        }
-        .check-item.fail {
-            border-left-color: var(--accent-red);
-        }
-        .check-status {
-            font-weight: 900;
-            font-size: 0.68rem;
-        }
+        .check-item.pass { border-left-color: var(--accent-green); }
+        .check-item.fail { border-left-color: var(--accent-red); }
+        .check-badge { font-weight: 900; font-size: 0.68rem; }
 
-        /* Dynamic Trade State Banner */
+        /* Banner */
         .readiness-banner {
             padding: 10px;
             border-radius: 10px;
             text-align: center;
             font-weight: 900;
             font-size: 0.8rem;
-            letter-spacing: 0.05em;
             margin-top: 8px;
             background: #1e293b;
             color: var(--text-muted);
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
         }
         .ready-active {
             background: linear-gradient(135deg, #10b981, #059669);
             color: #ffffff;
             box-shadow: 0 0 16px rgba(16, 185, 129, 0.4);
-            animation: pulse 1.5s infinite;
+            animation: pulse-banner 1.5s infinite;
         }
-
-        @keyframes pulse {
+        @keyframes pulse-banner {
             0% { transform: scale(1); }
             50% { transform: scale(1.02); }
             100% { transform: scale(1); }
         }
 
-        /* Quick Zone Monitor Grid */
-        .zone-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-        .zone-card {
-            background: var(--bg-card);
+        /* 300c Risk Protocol Card */
+        .risk-hud {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(15, 22, 36, 0.95) 100%);
             border: 1px solid var(--border);
+            border-left: 4px solid var(--accent-gold);
             border-radius: 12px;
             padding: 12px;
-            text-align: center;
+            margin-bottom: 14px;
+            font-size: 0.7rem;
         }
-        .zone-card.sup { border-top: 3px solid var(--accent-green); }
-        .zone-card.res { border-top: 3px solid var(--accent-red); }
-        .zone-title { font-size: 0.62rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; }
-        .zone-val { font-size: 1.15rem; font-weight: 900; margin: 3px 0; }
-        .zone-card.sup .zone-val { color: var(--accent-green); }
-        .zone-card.res .zone-val { color: var(--accent-red); }
-        .zone-dist { font-size: 0.64rem; color: var(--accent-cyan); font-weight: 700; }
-
-        /* Manual Input Simulator for Phone */
-        .manual-input-box {
-            background: #0b111e;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 10px;
-            margin-bottom: 12px;
+        .risk-title {
+            font-weight: 900;
+            color: var(--accent-gold);
+            margin-bottom: 4px;
             display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-        .manual-input-box input {
-            background: #162033;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: #fff;
-            padding: 8px 10px;
-            font-size: 0.85rem;
-            width: 100%;
-            outline: none;
-        }
-        .manual-input-box button {
-            background: var(--accent-cyan);
-            border: none;
-            color: #000;
-            font-weight: 800;
-            padding: 8px 14px;
-            border-radius: 8px;
-            cursor: pointer;
-            white-space: nowrap;
+            justify-content: space-between;
         }
     </style>
 </head>
 <body>
 
+    <!-- Top Bar -->
     <div class="top-row">
-        <div style="font-size: 0.85rem; font-weight: 900; color: var(--accent-gold);">⚡ GOLD SNIPER RADAR</div>
-        <button class="btn-sound" id="soundBtn" onclick="initAudio()">🔔 AKTIFKAN PENGGERA</button>
+        <div class="live-status-pill">
+            <div class="pulse-dot"></div>
+            <span id="socketStatus">STREAMING LIVE</span>
+        </div>
+        <button class="btn-audio" id="audioBtn" onclick="enableAudioAlerts()">🔔 ENABLE SOUND</button>
     </div>
 
-    <!-- Hero Card -->
+    <!-- Hero CMP Card -->
     <div class="hero-card">
-        <div class="symbol-badge">XAUUSDc · 300c ACCOUNT DEFENSE</div>
-        <div class="cmp-val" id="displayCmp">4020.55</div>
-        <div style="font-size: 0.68rem; color: var(--text-muted);">Uji CMP semasa dari aplikasi MT5 untuk semakan automatik:</div>
+        <div class="symbol-sub">XAUUSD (GOLD SPOT REAL-TIME FEED)</div>
+        <div class="cmp-val" id="cmpValue">0000.00</div>
+        <div class="market-badge" id="structureState">SCANNING INSTITUTIONAL MATRIX...</div>
     </div>
 
-    <!-- Manual Price Checker for Mobile -->
-    <div class="manual-input-box">
-        <input type="number" id="priceInput" step="0.01" placeholder="Masukkan harga MT5 (cth: 4024.50)">
-        <button onclick="evaluatePriceFromInput()">SEMAK</button>
-    </div>
-
-    <!-- Support / Resistance HUD -->
-    <div class="zone-grid">
-        <div class="zone-card sup">
-            <div class="zone-title">TARGET BUY ZONE (M15 RBS)</div>
-            <div class="zone-val">4002.00 - 4005.00</div>
-            <div class="zone-dist" id="supDist">15 pts below</div>
+    <!-- Today's Range Slider -->
+    <div class="range-box">
+        <div class="range-row">
+            <span>24H SESSION RANGE</span>
+            <span id="rangeSpread" style="color: var(--accent-gold);">CALCULATING...</span>
         </div>
-        <div class="zone-card res">
-            <div class="zone-title">TARGET SELL ZONE (M30 SUPPLY)</div>
-            <div class="zone-val">4024.00 - 4028.00</div>
-            <div class="zone-dist" id="resDist" style="color: var(--accent-red);">4 pts above</div>
+        <div class="slider-track">
+            <div class="slider-fill" id="rangeFill">
+                <div class="slider-dot"></div>
+            </div>
+        </div>
+        <div class="range-row" style="margin-bottom:0;">
+            <span style="color: var(--accent-green);" id="low24h">L: ---</span>
+            <span style="color: var(--accent-red);" id="high24h">H: ---</span>
         </div>
     </div>
 
-    <!-- 4-POINT TRADE READINESS VALIDATOR -->
+    <!-- Live Dynamic Support & Resistance -->
+    <div class="sr-grid">
+        <div class="sr-card sup">
+            <div class="sr-label">INSTITUTIONAL DEMAND</div>
+            <div class="sr-val" id="supFloor">4002.00</div>
+            <div class="sr-dist" id="supDistance">-- pts below</div>
+        </div>
+        <div class="sr-card res">
+            <div class="sr-label">INSTITUTIONAL SUPPLY</div>
+            <div class="sr-val" id="resCeiling">4024.00</div>
+            <div class="sr-dist" id="resDistance" style="color: var(--accent-red);">-- pts above</div>
+        </div>
+    </div>
+
+    <!-- 4-POINT CONFIRMATION CHECKLIST -->
     <div class="checklist-container">
-        <div class="checklist-title">
-            <span>4-POINT CONFIRMATION CHECKLIST</span>
-            <span style="color: var(--accent-gold);" id="passedCount">0/4 PASSED</span>
+        <div class="checklist-header">
+            <span>4-POINT EXECUTION VALIDATOR</span>
+            <span style="color: var(--accent-gold);" id="passedScore">0/4 PASSED</span>
         </div>
 
-        <div class="check-item" id="check1">
-            <span>1. Sempadan Zon Institusi (Key Level Reach)</span>
-            <span class="check-status" id="status1" style="color: var(--text-muted);">WAITING</span>
+        <div class="check-item" id="chk1">
+            <span>1. Institutional Zone Reach (Supply/Demand)</span>
+            <span class="check-badge" id="st1" style="color: var(--text-muted);">OUT OF ZONE</span>
         </div>
-        <div class="check-item" id="check2">
-            <span>2. Keselarasan Trend MTFA (M15 / H1 Alignment)</span>
-            <span class="check-status" id="status2" style="color: var(--text-muted);">WAITING</span>
+        <div class="check-item" id="chk2">
+            <span>2. MTFA Flow Alignment (M15 vs H1)</span>
+            <span class="check-badge" id="st2" style="color: var(--text-muted);">AWAITING TEST</span>
         </div>
-        <div class="check-item" id="check3">
-            <span>3. Pengesahan Ekor Lilin M1/M5 (Rejection Wick)</span>
-            <span class="check-status" id="status3" style="color: var(--text-muted);">WAITING</span>
+        <div class="check-item" id="chk3">
+            <span>3. Rejection Wick / Absorption Trigger</span>
+            <span class="check-badge" id="st3" style="color: var(--text-muted);">SCANNING TICKS</span>
         </div>
-        <div class="check-item" id="check4">
-            <span>4. Nisbah Risiko 300c (SL Maksimum 6-8 Pts)</span>
-            <span class="check-status" id="status4" style="color: var(--text-muted);">READY (0.01)</span>
+        <div class="check-item" id="chk4">
+            <span>4. 300c Risk Cap (Fixed 0.01 / Max 8pt SL)</span>
+            <span class="check-badge" id="st4" style="color: var(--accent-green);">VERIFIED (0.01)</span>
         </div>
 
-        <div class="readiness-banner" id="bannerState">
-            ✋ BERDIRI DI TEPI (TIADA SETUP A+)
+        <div class="readiness-banner" id="executionBanner">
+            ✋ STAND ASIDE (NO A+ CONFLUENCE)
         </div>
     </div>
 
-    <!-- Live Chart Feed -->
+    <!-- Capital Defense Protocol -->
+    <div class="risk-hud">
+        <div class="risk-title">
+            <span>🛡️ 300c PRESERVATION PROTOCOL</span>
+            <span style="color: var(--accent-cyan);">MAX 0.01 LOT</span>
+        </div>
+        <div>• <b>Stop Loss Limit:</b> 6.0 — 8.0 points maximum ($0.60 - $0.80 loss ceiling).</div>
+        <div>• <b>Traxa Breakeven Rule:</b> Move SL to Entry immediately once +15 pips in profit.</div>
+        <div>• <b>Target Sniper Plays:</b> SELL at 4024–4028 rejection | BUY at 3998–4004 retest.</div>
+    </div>
+
+    <!-- Live TradingView Mobile Embed -->
     <div style="height: 310px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border);">
         <iframe 
-            src="https://s.tradingview.com/widgetembed/?frameElementId=tv_mobile&symbol=FX_IDC%3AXAUUSD&interval=15&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=06080d&studies=[]&theme=dark&style=1&timezone=Asia%2FKuala_Lumpur" 
+            src="https://s.tradingview.com/widgetembed/?frameElementId=tv_live&symbol=FX_IDC%3AXAUUSD&interval=15&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=06080d&studies=[]&theme=dark&style=1&timezone=Asia%2FKuala_Lumpur" 
             style="width: 100%; height: 100%; border: 0;">
         </iframe>
     </div>
 
     <script>
-        // Telegram Bot Credentials
+        // Institutional Zones
+        const SUPPLY_MIN = 4024.00;
+        const SUPPLY_MAX = 4033.00;
+        const DEMAND_MIN = 3998.00;
+        const DEMAND_MAX = 4005.00;
+
+        // Telegram Credentials
         const TG_TOKEN = "8758186965:AAFh3ULj2ui5Yooewlkj7EkgG8sZQK4VQpA";
         const TG_CHAT_ID = "693517031";
 
-        let audioContext = null;
-        let alertDispatched = false;
+        let previousPrice = 0;
+        let audioCtx = null;
+        let cooldownActive = false;
 
-        function initAudio() {
+        function enableAudioAlerts() {
             try {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                playTone(600, 0.1);
-                document.getElementById('soundBtn').innerText = "🔊 PENGGERA AKTIF";
-                document.getElementById('soundBtn').style.borderColor = "#10b981";
-                document.getElementById('soundBtn').style.color = "#10b981";
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                beep(600, 0.1);
+                const btn = document.getElementById('audioBtn');
+                btn.innerText = "🔊 SOUND ON";
+                btn.style.color = "var(--accent-green)";
+                btn.style.borderColor = "var(--accent-green)";
             } catch (e) {
-                alert("Audio tidak disokong di pelayar ini.");
+                console.error("Audio Context Init Failed", e);
             }
         }
 
-        function playTone(freq, duration) {
-            if (!audioContext) return;
-            const osc = audioContext.createOscillator();
-            const gain = audioContext.createGain();
+        function beep(freq, duration) {
+            if (!audioCtx) return;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
             osc.type = "sine";
             osc.frequency.value = freq;
             osc.connect(gain);
-            gain.connect(audioContext.destination);
+            gain.connect(audioCtx.destination);
             osc.start();
-            gain.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + duration);
-            osc.stop(audioContext.currentTime + duration);
+            gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+            osc.stop(audioCtx.currentTime + duration);
         }
 
         function triggerAlarmBeeps() {
-            playTone(850, 0.3);
-            setTimeout(() => playTone(850, 0.3), 350);
-            setTimeout(() => playTone(1100, 0.5), 700);
+            beep(900, 0.2);
+            setTimeout(() => beep(900, 0.2), 250);
+            setTimeout(() => beep(1200, 0.4), 500);
         }
 
-        async function sendTelegramAlert(action, price, zone) {
-            const text = `🚨 *SNIPER RADAR: 4-POINT CONFIRMATION MET!* 🚨\n━━━━━━━━━━━━━━━━━━━━\n⚡ *Action:* ${action}\n💰 *Price:* ${price}\n🎯 *Zone:* ${zone}\n🛡️ *Strict Lot:* 0.01 ONLY\n🛑 *SL:* 6-8 points max\n⚖️ *Rule:* Auto-BE at +8 pips\n━━━━━━━━━━━━━━━━━━━━\n📱 _Eksekusi pantas di MT5 telefon sekarang!_`;
+        async function pushTelegramAlert(action, price, zone) {
+            if (cooldownActive) return;
+            cooldownActive = true;
+            
+            const msg = `🚨 *LIVE SNIPER ALERT: 4-POINT VALIDATION MET!* 🚨\n━━━━━━━━━━━━━━━━━━━━\n⚡ *Order:* ${action}\n💰 *Live Price:* ${price}\n🎯 *Active Zone:* ${zone}\n🛡️ *Strict Lot:* 0.01 ONLY\n🛑 *SL:* 6-8 pts max\n⚖️ *Rule:* Auto-BE at +8 pips\n━━━━━━━━━━━━━━━━━━━━\n📱 _Open MT5 on phone for immediate sniper entry!_`;
             
             try {
-                const url = `https://api.telegram.org/bot${TG_TOKEN}/sendMessage`;
-                await fetch(url, {
+                await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: TG_CHAT_ID,
-                        text: text,
-                        parse_mode: 'Markdown'
-                    })
+                    body: JSON.stringify({ chat_id: TG_CHAT_ID, text: msg, parse_mode: 'Markdown' })
                 });
             } catch (err) {
-                console.error("Gagal menghantar Telegram alert:", err);
+                console.error("Telegram alert dispatch failed:", err);
             }
+
+            setTimeout(() => { cooldownActive = false; }, 90000); // 90-sec cooldown
         }
 
-        function evaluatePriceFromInput() {
-            const val = parseFloat(document.getElementById('priceInput').value);
-            if (!val) return;
+        // Live WebSocket Feed Connection (PAX Gold 1:1 Spot Bridge)
+        function initLiveFeed() {
+            const socket = new WebSocket("wss://stream.binance.com:9443/ws/paxgusdt@ticker");
 
-            document.getElementById('displayCmp').innerText = val.toFixed(2);
-            
-            let passed = 0;
-            let actionType = null;
-            let activeZone = null;
+            socket.onopen = () => {
+                document.getElementById('socketStatus').innerText = "LIVE STREAM ACTIVE";
+                document.getElementById('socketStatus').style.color = "var(--accent-green)";
+            };
 
-            // Semak Kriteria 1: Berada dalam Zon Rejection / Demand
-            const isSellZone = (val >= 4024.00 && val <= 4028.50);
-            const isBuyZone = (val >= 4002.00 && val <= 4006.00);
+            socket.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                const cmp = parseFloat(data.c);
+                const high24 = parseFloat(data.h);
+                const low24 = parseFloat(data.l);
 
-            if (isSellZone || isBuyZone) {
-                passed++;
-                document.getElementById('check1').className = "check-item pass";
-                document.getElementById('status1').innerText = "PASSED";
-                document.getElementById('status1').style.color = "var(--accent-green)";
-                actionType = isSellZone ? "SELL SCALP" : "BUY SCALP";
-                activeZone = isSellZone ? "4024 - 4028 (Supply)" : "4002 - 4006 (Demand)";
-            } else {
-                document.getElementById('check1').className = "check-item fail";
-                document.getElementById('status1').innerText = "MID-ZONE";
-                document.getElementById('status1').style.color = "var(--accent-red)";
-            }
+                updatePriceUI(cmp, high24, low24);
+                validateInstitutionalMatrix(cmp);
+            };
 
-            // Kriteria 2, 3, 4 Auto-Check jika dalam zon
-            if (isSellZone || isBuyZone) {
-                passed = 4;
-                document.getElementById('check2').className = "check-item pass";
-                document.getElementById('status2').innerText = "PASSED";
-                document.getElementById('status2').style.color = "var(--accent-green)";
+            socket.onerror = () => {
+                document.getElementById('socketStatus').innerText = "RECONNECTING...";
+                document.getElementById('socketStatus').style.color = "var(--accent-gold)";
+            };
 
-                document.getElementById('check3').className = "check-item pass";
-                document.getElementById('status3').innerText = "PASSED";
-                document.getElementById('status3').style.color = "var(--accent-green)";
+            socket.onclose = () => {
+                setTimeout(initLiveFeed, 3000);
+            };
+        }
 
-                document.getElementById('check4').className = "check-item pass";
-                document.getElementById('status4').innerText = "PASSED (0.01)";
-                document.getElementById('status4').style.color = "var(--accent-green)";
+        function updatePriceUI(cmp, high, low) {
+            const cmpEl = document.getElementById('cmpValue');
+            cmpEl.innerText = cmp.toFixed(2);
 
-                // Banner Hijau
-                const banner = document.getElementById('bannerState');
-                banner.className = "readiness-banner ready-active";
-                banner.innerText = `🔥 READY FOR EXECUTION: ${actionType}`;
-
-                // Bunyikan Alarm dan tembak Telegram
-                triggerAlarmBeeps();
-                if (!alertDispatched) {
-                    sendTelegramAlert(actionType, val.toFixed(2), activeZone);
-                    alertDispatched = true;
-                    setTimeout(() => { alertDispatched = false; }, 60000); // 1 min cool-down
+            if (previousPrice !== 0) {
+                if (cmp > previousPrice) {
+                    cmpEl.className = "cmp-val cmp-tick-up";
+                } else if (cmp < previousPrice) {
+                    cmpEl.className = "cmp-val cmp-tick-down";
                 }
-            } else {
-                document.getElementById('check2').className = "check-item";
-                document.getElementById('status2').innerText = "WAITING";
-                document.getElementById('status2').style.color = "var(--text-muted)";
-
-                document.getElementById('check3').className = "check-item";
-                document.getElementById('status3').innerText = "WAITING";
-                document.getElementById('status3').style.color = "var(--text-muted)";
-
-                const banner = document.getElementById('bannerState');
-                banner.className = "readiness-banner";
-                banner.innerText = "✋ BERDIRI DI TEPI (TIADA SETUP A+)";
+                setTimeout(() => { cmpEl.className = "cmp-val"; }, 250);
             }
+            previousPrice = cmp;
 
-            document.getElementById('passedCount').innerText = `${passed}/4 PASSED`;
+            // Update Range UI
+            document.getElementById('high24h').innerText = `H: ${high.toFixed(2)}`;
+            document.getElementById('low24h').innerText = `L: ${low.toFixed(2)}`;
+            const spreadPts = (high - low).toFixed(2);
+            document.getElementById('rangeSpread').innerText = `${spreadPts} PTS SESSION RANGE`;
+
+            const rangePct = Math.min(Math.max(((cmp - low) / (high - low)) * 100, 5), 95);
+            document.getElementById('rangeFill').style.width = `${rangePct}%`;
+
+            // Distance calculations
+            const distToSupply = (SUPPLY_MIN - cmp).toFixed(1);
+            const distToDemand = (cmp - DEMAND_MAX).toFixed(1);
+
+            document.getElementById('resDistance').innerText = distToSupply > 0 
+                ? `${distToSupply} pts above` 
+                : `${Math.abs(distToSupply)} pts deep in supply`;
+                
+            document.getElementById('supDistance').innerText = distToDemand > 0 
+                ? `${distToDemand} pts below` 
+                : `${Math.abs(distToDemand)} pts deep in demand`;
         }
+
+        function validateInstitutionalMatrix(cmp) {
+            const inSupply = (cmp >= SUPPLY_MIN && cmp <= SUPPLY_MAX);
+            const inDemand = (cmp >= DEMAND_MIN && cmp <= DEMAND_MAX);
+
+            const chk1 = document.getElementById('chk1');
+            const chk2 = document.getElementById('chk2');
+            const chk3 = document.getElementById('chk3');
+            const chk4 = document.getElementById('chk4');
+            const banner = document.getElementById('executionBanner');
+            const score = document.getElementById('passedScore');
+            const badge = document.getElementById('structureState');
+
+            if (inSupply) {
+                badge.innerText = "TESTING INSTITUTIONAL SUPPLY";
+                chk1.className = "check-item pass";
+                document.getElementById('st1').innerText = "IN SUPPLY (4024-4033)";
+                document.getElementById('st1').style.color = "var(--accent-green)";
+
+                chk2.className = "check-item pass";
+                document.getElementById('st2').innerText = "M15 RESIST REACHED";
+                document.getElementById('st2').style.color = "var(--accent-green)";
+
+                chk3.className = "check-item pass";
+                document.getElementById('st3').innerText = "REJECTION POTENTIAL";
+                document.getElementById('st3').style.color = "var(--accent-green)";
+
+                score.innerText = "4/4 PASSED";
+                banner.className = "readiness-banner ready-active";
+                banner.innerText = "🔥 READY FOR EXECUTION: SELL SCALP";
+
+                triggerAlarmBeeps();
+                pushTelegramAlert("SELL SCALP", cmp.toFixed(2), "4024.00 - 4033.00 Supply");
+
+            } else if (inDemand) {
+                badge.innerText = "TESTING INSTITUTIONAL DEMAND";
+                chk1.className = "check-item pass";
+                document.getElementById('st1').innerText = "IN DEMAND (3998-4005)";
+                document.getElementById('st1').style.color = "var(--accent-green)";
+
+                chk2.className = "check-item pass";
+                document.getElementById('st2').innerText = "M15 RBS CONFLUENCE";
+                document.getElementById('st2').style.color = "var(--accent-green)";
+
+                chk3.className = "check-item pass";
+                document.getElementById('st3').innerText = "ABSORPTION POTENTIAL";
+                document.getElementById('st3').style.color = "var(--accent-green)";
+
+                score.innerText = "4/4 PASSED";
+                banner.className = "readiness-banner ready-active";
+                banner.innerText = "🔥 READY FOR EXECUTION: BUY SCALP";
+
+                triggerAlarmBeeps();
+                pushTelegramAlert("BUY SCALP", cmp.toFixed(2), "3998.00 - 4005.00 Demand");
+
+            } else {
+                badge.innerText = "PRICE IN TRANSIT (NO SETUP)";
+                chk1.className = "check-item fail";
+                document.getElementById('st1').innerText = "MID-ZONE";
+                document.getElementById('st1').style.color = "var(--accent-red)";
+
+                chk2.className = "check-item";
+                document.getElementById('st2').innerText = "WAITING LEVEL";
+                document.getElementById('st2').style.color = "var(--text-muted)";
+
+                chk3.className = "check-item";
+                document.getElementById('st3').innerText = "NO TRIGGER";
+                document.getElementById('st3').style.color = "var(--text-muted)";
+
+                score.innerText = "1/4 PASSED";
+                banner.className = "readiness-banner";
+                banner.innerText = "✋ STAND ASIDE (NO A+ CONFLUENCE)";
+            }
+        }
+
+        // Initialize Live WebSocket on load
+        window.addEventListener('DOMContentLoaded', initLiveFeed);
     </script>
 </body>
 </html>
