@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gold Institutional Mobile Radar</title>
+    <style>
+        :root {
+            --bg-base: #080b11;
+            --bg-card: #111827;
+            --border: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-gold: #fbbf24;
+            --accent-cyan: #38bdf8;
+            --accent-purple: #c084fc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            padding: 12px 14px 40px 14px;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 12px;
+        }
+        .brand-title {
+            font-size: 0.92rem;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .badge-live {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: var(--accent-green);
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 12px;
+            text-transform: uppercase;
+        }
+
+        /* Hero Price Card */
+        .hero-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            margin-bottom: 12px;
+        }
+        .symbol-sub {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .cmp-display {
+            font-size: 2.3rem;
+            font-weight: 900;
+            color: var(--accent-gold);
+            letter-spacing: -0.02em;
+            margin: 4px 0;
+            text-shadow: 0 0 16px rgba(251, 191, 36, 0.25);
+        }
+        .trend-pill {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 3px 12px;
+            border-radius: 20px;
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--accent-gold);
+            border: 1px solid rgba(251, 191, 36, 0.35);
+        }
+
+        /* Today's Range Slider (Traxa Style) */
+        .range-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+        }
+        .range-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.68rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .slider-track {
+            height: 6px;
+            background: #1e293b;
+            border-radius: 6px;
+            position: relative;
+            margin: 10px 0;
+        }
+        .slider-progress {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-gold), var(--accent-red));
+            border-radius: 6px;
+            width: 82%; /* Dynamic position */
+        }
+        .slider-thumb {
+            position: absolute;
+            right: 0;
+            top: -5px;
+            width: 16px;
+            height: 16px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+        .range-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+
+        /* Support / Resistance Dual HUD */
+        .sr-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .sr-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+        }
+        .sr-card.sup { border-top: 3px solid var(--accent-green); }
+        .sr-card.res { border-top: 3px solid var(--accent-red); }
+        .sr-label {
+            font-size: 0.64rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        .sr-value {
+            font-size: 1.25rem;
+            font-weight: 900;
+            margin: 3px 0;
+        }
+        .sr-card.sup .sr-value { color: var(--accent-green); }
+        .sr-card.res .sr-value { color: var(--accent-red); }
+        .sr-distance {
+            font-size: 0.64rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        /* Multi-Timeframe Alignment Meter (Traxa Style) */
+        .section-header {
+            font-size: 0.7rem;
+            font-weight: 900;
+            color: var(--accent-cyan);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .tf-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .tf-pill {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 8px 4px;
+            text-align: center;
+        }
+        .tf-name {
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: var(--text-muted);
+        }
+        .tf-status {
+            font-size: 0.72rem;
+            font-weight: 900;
+            margin-top: 2px;
+        }
+        .tf-bull { color: var(--accent-green); }
+        .tf-bear { color: var(--accent-red); }
+        .tf-neutral { color: var(--accent-gold); }
+
+        /* Manual Risk Calculator for 300c Account */
+        .calculator-box {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.95) 100%);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 14px;
+        }
+        .calc-title {
+            font-size: 0.72rem;
+            font-weight: 900;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .calc-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        .calc-row b {
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="brand-title">⚡ GOLD MOBILE RADAR</div>
+        <div class="badge-live">● MT5 MANUAL MODE</div>
+    </div>
+
+    <!-- Hero CMP Card -->
+    <div class="hero-card">
+        <div class="symbol-sub">XAUUSDc (Gold Spot Cent)</div>
+        <div class="cmp-display" id="cmpVal">4008.80</div>
+        <div class="trend-pill" id="trendState">M15 RESISTANCE TEST</div>
+    </div>
+
+    <!-- Today's Range Slider -->
+    <div class="range-container">
+        <div class="range-header">
+            <span>TODAY'S RANGE</span>
+            <span id="rangePips">898 PIPS EXPANSION</span>
+        </div>
+        <div class="slider-track">
+            <div class="slider-progress" id="sliderFill" style="width: 86%;">
+                <div class="slider-thumb"></div>
+            </div>
+        </div>
+        <div class="range-footer">
+            <span style="color: var(--accent-green);" id="lowVal">L 3919.90</span>
+            <span style="color: var(--accent-red);" id="highVal">H 4009.70</span>
+        </div>
+    </div>
+
+    <!-- Support / Resistance HUD -->
+    <div class="sr-grid">
+        <div class="sr-card sup">
+            <div class="sr-label">NEAREST DEMAND</div>
+            <div class="sr-value" id="supLevel">3990.00</div>
+            <div class="sr-distance" id="supDist">18.8 pts below</div>
+        </div>
+        <div class="sr-card res">
+            <div class="sr-label">NEAREST SUPPLY</div>
+            <div class="sr-value" id="resLevel">4012.00</div>
+            <div class="sr-distance" id="resDist" style="color: var(--accent-red);">3.2 pts above</div>
+        </div>
+    </div>
+
+    <!-- Multi-Timeframe Alignment -->
+    <div class="section-header">MULTI-TIMEFRAME ALIGNMENT</div>
+    <div class="tf-grid">
+        <div class="tf-pill">
+            <div class="tf-name">M5</div>
+            <div class="tf-status tf-bull">BULLISH (67%)</div>
+        </div>
+        <div class="tf-pill">
+            <div class="tf-name">M15</div>
+            <div class="tf-status tf-neutral">AT CEILING</div>
+        </div>
+        <div class="tf-pill">
+            <div class="tf-name">M30</div>
+            <div class="tf-status tf-neutral">NEUTRAL</div>
+        </div>
+        <div class="tf-pill">
+            <div class="tf-name">H1</div>
+            <div class="tf-status tf-neutral">RESIST TEST</div>
+        </div>
+        <div class="tf-pill">
+            <div class="tf-name">H4</div>
+            <div class="tf-status tf-bear">BEARISH FLOW</div>
+        </div>
+        <div class="tf-pill">
+            <div class="tf-name">D1</div>
+            <div class="tf-status tf-bear">STRONG SELL</div>
+        </div>
+    </div>
+
+    <!-- Manual Risk Protection Calculator (300c Account) -->
+    <div class="calculator-box">
+        <div class="calc-title">
+            <span>🛡️ MANUAL SOP (300c BALANCE)</span>
+            <span style="color: #38bdf8;">0.01 LOT ONLY</span>
+        </div>
+        <div class="calc-row">
+            <span>Current Execution Bias:</span>
+            <b style="color: var(--accent-gold);">WAIT FOR CONFIRMATION</b>
+        </div>
+        <div class="calc-row">
+            <span>Max Invalidation SL Allowed:</span>
+            <b>6.0 - 8.0 Points ($0.60 - $0.80)</b>
+        </div>
+        <div class="calc-row">
+            <span>Safe Retracement Buy Target:</span>
+            <b style="color: var(--accent-green);">3971.00 - 3980.00</b>
+        </div>
+        <div class="calc-row">
+            <span>Key Resistance Rejection Sell:</span>
+            <b style="color: var(--accent-red);">4012.00 - 4015.00</b>
+        </div>
+    </div>
+
+    <!-- Live TradingView Mobile Embed -->
+    <div class="section-header">LIVE TRADINGVIEW FEED</div>
+    <div style="height: 320px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border);">
+        <iframe 
+            src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_76b4a&symbol=FX_IDC%3AXAUUSD&interval=15&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=080b11&studies=[]&theme=dark&style=1&timezone=Asia%2FKuala_Lumpur" 
+            style="width: 100%; height: 100%; border: 0;">
+        </iframe>
+    </div>
+
+</body>
+</html>
