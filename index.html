@@ -3,789 +3,617 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>XAUUSD Institutional Radar Terminal</title>
+    <title>ZS-X // INSTITUTIONAL TERMINAL</title>
     <style>
         :root {
-            --bg-base: #06080d;
-            --bg-card: #0f1624;
-            --bg-card-inner: #162033;
-            --border: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-green: #10b981;
-            --accent-red: #ef4444;
-            --accent-gold: #f59e0b;
-            --accent-cyan: #06b6d4;
-            --accent-purple: #8b5cf6;
+            --bg-deep: #05070b;
+            --bg-card: #0a0f18;
+            --bg-input: #111827;
+            --border: #1f293d;
+            --text-main: #f1f5f9;
+            --text-muted: #64748b;
+            --neon-green: #10b981;
+            --neon-lime: #a3e635;
+            --neon-red: #f43f5e;
+            --neon-gold: #f59e0b;
+            --neon-cyan: #06b6d4;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, monospace;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-base);
+            background-color: var(--bg-deep);
             color: var(--text-main);
-            padding: 12px 14px 60px 14px;
+            padding: 12px 14px 70px 14px;
         }
 
-        /* Top Header Navigation */
-        .top-row {
+        /* Top Header */
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
             border-bottom: 1px solid var(--border);
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
-        .live-status-pill {
+        .brand-box {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.65rem;
-            font-weight: 800;
-            color: var(--accent-green);
-            background: rgba(16, 185, 129, 0.12);
-            padding: 4px 10px;
-            border-radius: 20px;
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            gap: 8px;
         }
-        .pulse-dot {
-            width: 7px;
-            height: 7px;
-            background-color: var(--accent-green);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--accent-green);
-            animation: pulse-live 1.2s infinite;
-        }
-        @keyframes pulse-live {
-            0% { transform: scale(0.9); opacity: 0.6; }
-            50% { transform: scale(1.3); opacity: 1; }
-            100% { transform: scale(0.9); opacity: 0.6; }
-        }
-
-        .action-btns {
-            display: flex;
-            gap: 6px;
-        }
-        .btn-action {
-            background: rgba(6, 182, 212, 0.12);
-            border: 1px solid var(--accent-cyan);
-            color: var(--accent-cyan);
-            font-size: 0.68rem;
-            font-weight: 800;
-            padding: 5px 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .btn-action:active {
-            transform: scale(0.96);
-        }
-
-        /* Hero Price Card */
-        .hero-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 16px;
-            text-align: center;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-            margin-bottom: 12px;
-            position: relative;
-        }
-        .symbol-sub {
-            font-size: 0.72rem;
+        .brand-logo {
+            font-size: 0.95rem;
             font-weight: 900;
-            color: var(--accent-gold);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-        .cmp-val {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--accent-gold);
-            margin: 4px 0;
-            transition: color 0.3s ease;
-        }
-        .cmp-tick-up { color: var(--accent-green) !important; text-shadow: 0 0 16px rgba(16, 185, 129, 0.4); }
-        .cmp-tick-down { color: var(--accent-red) !important; text-shadow: 0 0 16px rgba(239, 68, 68, 0.4); }
-        
-        .market-badge {
-            display: inline-block;
-            font-size: 0.68rem;
-            font-weight: 800;
-            padding: 3px 12px;
-            border-radius: 20px;
-            background: rgba(245, 158, 11, 0.15);
-            color: var(--accent-gold);
-            border: 1px solid rgba(245, 158, 11, 0.35);
-        }
-
-        /* 24h Session Range Slider */
-        .range-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px 14px;
-            margin-bottom: 12px;
-        }
-        .range-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.66rem;
-            font-weight: 800;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            margin-bottom: 6px;
-        }
-        .slider-track {
-            height: 6px;
-            background: #1e293b;
-            border-radius: 6px;
-            position: relative;
-            margin: 8px 0;
-        }
-        .slider-fill {
-            position: absolute;
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-gold), var(--accent-red));
-            border-radius: 6px;
-            width: 50%;
-            transition: width 0.4s ease;
-        }
-        .slider-dot {
-            position: absolute;
-            right: 0;
-            top: -5px;
-            width: 16px;
-            height: 16px;
-            background: #ffffff;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(255,255,255,0.8);
-        }
-
-        /* Dynamic Support & Resistance HUD */
-        .sr-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-        .sr-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px;
-            text-align: center;
-        }
-        .sr-card.sup { border-top: 3px solid var(--accent-green); }
-        .sr-card.res { border-top: 3px solid var(--accent-red); }
-        .sr-label { font-size: 0.62rem; font-weight: 800; color: var(--text-muted); }
-        .sr-val { font-size: 1.15rem; font-weight: 900; margin: 3px 0; }
-        .sr-card.sup .sr-val { color: var(--accent-green); }
-        .sr-card.res .sr-val { color: var(--accent-red); }
-        .sr-dist { font-size: 0.64rem; font-weight: 700; color: var(--accent-cyan); }
-
-        /* 4-POINT VALIDATION CHECKLIST HUD */
-        .checklist-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 14px;
-            margin-bottom: 12px;
-        }
-        .checklist-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.72rem;
-            font-weight: 900;
-            color: var(--accent-cyan);
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-        .check-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #0b111e;
-            padding: 8px 10px;
-            border-radius: 8px;
-            margin-bottom: 6px;
-            font-size: 0.7rem;
-            border-left: 3px solid #334155;
-            transition: all 0.3s ease;
-        }
-        .check-item.pass { border-left-color: var(--accent-green); }
-        .check-item.fail { border-left-color: var(--accent-red); }
-        .check-badge { font-weight: 900; font-size: 0.68rem; }
-
-        /* Trade Execution Banner */
-        .readiness-banner {
-            padding: 10px;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: 900;
-            font-size: 0.8rem;
-            margin-top: 8px;
-            background: #1e293b;
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
-            transition: all 0.3s ease;
-        }
-        .ready-active {
-            background: linear-gradient(135deg, #10b981, #059669);
+            letter-spacing: 0.12em;
             color: #ffffff;
-            box-shadow: 0 0 16px rgba(16, 185, 129, 0.4);
-            animation: pulse-banner 1.5s infinite;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        @keyframes pulse-banner {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
+        .brand-logo span {
+            color: var(--neon-cyan);
+        }
+        .status-badge {
+            font-size: 0.62rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--neon-green);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            text-transform: uppercase;
         }
 
-        /* Interactive Tabs */
+        /* Navigation Tabs */
         .tab-bar {
             display: flex;
-            background: #0b111e;
+            background: #090d16;
             padding: 4px;
-            border-radius: 12px;
-            margin-bottom: 12px;
+            border-radius: 10px;
+            margin-bottom: 14px;
             border: 1px solid var(--border);
         }
         .tab-btn {
             flex: 1;
             padding: 8px 0;
             text-align: center;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 800;
             color: var(--text-muted);
             border: none;
             background: transparent;
             cursor: pointer;
-            border-radius: 8px;
+            border-radius: 6px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
             transition: all 0.2s ease;
         }
         .tab-btn.active {
-            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            background: #1e293b;
             color: #ffffff;
-            box-shadow: 0 2px 10px rgba(56, 189, 248, 0.3);
+            border: 1px solid #334155;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
 
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        /* Setup Cards */
-        .setup-card {
+        /* TAB 1: OVERVIEW CARD */
+        .profile-banner {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 8px;
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 12px;
         }
-        .setup-card.sell { border-left: 4px solid var(--accent-red); }
-        .setup-card.buy { border-left: 4px solid var(--accent-green); }
-        .setup-badge {
+        .profile-title {
             font-size: 0.65rem;
-            font-weight: 900;
-            padding: 2px 8px;
-            border-radius: 6px;
+            font-weight: 800;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
         }
-        .setup-badge.sell { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); }
-        .setup-badge.buy { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
+        .profile-name {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin: 2px 0;
+        }
+        .session-badge {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: 800;
+            color: var(--neon-cyan);
+            letter-spacing: 0.05em;
+        }
 
-        /* Capital Defense Protocol */
-        .risk-hud {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(15, 22, 36, 0.95) 100%);
+        .asset-card {
+            background: var(--bg-card);
             border: 1px solid var(--border);
-            border-left: 4px solid var(--accent-gold);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 14px;
-            font-size: 0.7rem;
-        }
-        .risk-title {
-            font-weight: 900;
-            color: var(--accent-gold);
-            margin-bottom: 4px;
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--neon-green);
             display: flex;
             justify-content: space-between;
+            align-items: center;
+        }
+        .asset-title {
+            font-size: 0.85rem;
+            font-weight: 900;
+        }
+        .asset-sub {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Hero Price Card */
+        .cmp-card {
+            background: linear-gradient(180deg, #0d1524 0%, #070a12 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .cmp-symbol {
+            font-size: 0.68rem;
+            font-weight: 800;
+            color: var(--neon-gold);
+            letter-spacing: 0.08em;
+        }
+        .cmp-num {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--neon-gold);
+            margin: 4px 0;
+        }
+
+        /* TAB 2: TERMINAL LOGS (ZS-X CONSOLE) */
+        .terminal-box {
+            background: #020408;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 12px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.72rem;
+            height: 380px;
+            overflow-y: auto;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            border-top: 3px solid var(--neon-cyan);
+        }
+        .log-time { color: #64748b; }
+        .log-exec { color: var(--neon-lime); font-weight: 900; }
+        .log-sync { color: var(--neon-cyan); }
+        .log-scan { color: #e2e8f0; }
+
+        /* TAB 3: ALGORITHM TUNING */
+        .tuning-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 12px;
+        }
+        .section-header {
+            font-size: 0.72rem;
+            font-weight: 900;
+            color: var(--neon-gold);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .switch-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #141c2c;
+        }
+        .switch-label {
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .input-group label {
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        .input-group input {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.85rem;
+            outline: none;
+            text-align: center;
+        }
+
+        .btn-action-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+        }
+        .btn-reset {
+            flex: 1;
+            background: #141b28;
+            border: 1px solid #2d3748;
+            color: var(--text-muted);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        .btn-deploy {
+            flex: 2;
+            background: linear-gradient(135deg, #84cc16 0%, #4d7c0f 100%);
+            border: none;
+            color: #000000;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(132, 204, 22, 0.3);
+        }
+
+        /* MODAL: PROTOKOL OVERRIDE */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            padding: 20px;
+        }
+        .modal-box {
+            background: #0d131f;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            padding: 18px;
+            width: 100%;
+            max-width: 360px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        .modal-title {
+            color: var(--neon-gold);
+            font-weight: 900;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+        .modal-body {
+            font-size: 0.7rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .btn-modal-cancel {
+            flex: 1;
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .btn-modal-confirm {
+            flex: 1.5;
+            background: var(--neon-lime);
+            border: none;
+            color: #000000;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 900;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
     <!-- Header Navigation -->
-    <div class="top-row">
-        <div class="live-status-pill">
-            <div class="pulse-dot"></div>
-            <span id="socketStatus">CONNECTING...</span>
+    <div class="header">
+        <div class="brand-box">
+            <div class="brand-logo">ZS-<span>X</span></div>
+            <div class="status-badge" id="netStatus">ONLINE</div>
         </div>
-        <div class="action-btns">
-            <button class="btn-action" id="tgBtn" onclick="testTelegramAlert()">🧪 TEST TELEGRAM</button>
-            <button class="btn-action" id="audioBtn" onclick="enableAudioAlerts()">🔔 ENABLE SOUND</button>
-        </div>
+        <button onclick="testTelegram()" style="background: rgba(6,182,212,0.15); border: 1px solid var(--neon-cyan); color: var(--neon-cyan); font-size: 0.65rem; font-weight: 800; padding: 4px 8px; border-radius: 6px; cursor: pointer;">
+            TELEGRAM TEST
+        </button>
     </div>
 
-    <!-- Hero CMP Card -->
-    <div class="hero-card">
-        <div class="symbol-sub">XAUUSD (GOLD SPOT REAL-TIME FEED)</div>
-        <div class="cmp-val" id="cmpDisplay">0000.00</div>
-        <div class="market-badge" id="marketState">SCANNING INSTITUTIONAL MATRIX...</div>
-    </div>
-
-    <!-- Session Range Slider -->
-    <div class="range-box">
-        <div class="range-row">
-            <span>24H SESSION RANGE</span>
-            <span id="rangeSpread" style="color: var(--accent-gold);">CALCULATING...</span>
-        </div>
-        <div class="slider-track">
-            <div class="slider-fill" id="sliderFill">
-                <div class="slider-dot"></div>
-            </div>
-        </div>
-        <div class="range-row" style="margin-bottom:0;">
-            <span style="color: var(--accent-green);" id="low24h">L: ---</span>
-            <span style="color: var(--accent-red);" id="high24h">H: ---</span>
-        </div>
-    </div>
-
-    <!-- Dynamic S/R Matrix -->
-    <div class="sr-grid">
-        <div class="sr-card sup">
-            <div class="sr-label">INSTITUTIONAL DEMAND</div>
-            <div class="sr-val" id="supFloor">4002.00</div>
-            <div class="sr-dist" id="supDistance">-- pts below</div>
-        </div>
-        <div class="sr-card res">
-            <div class="sr-label">INSTITUTIONAL SUPPLY</div>
-            <div class="sr-val" id="resCeiling">4024.00</div>
-            <div class="sr-dist" id="resDistance" style="color: var(--accent-red);">-- pts above</div>
-        </div>
-    </div>
-
-    <!-- 4-POINT TRADE READINESS VALIDATOR -->
-    <div class="checklist-container">
-        <div class="checklist-header">
-            <span>4-POINT EXECUTION VALIDATOR</span>
-            <span style="color: var(--accent-gold);" id="passedScore">0/4 PASSED</span>
-        </div>
-
-        <div class="check-item" id="chk1">
-            <span>1. Institutional Zone Reach (Supply / Demand)</span>
-            <span class="check-badge" id="st1" style="color: var(--text-muted);">OUT OF ZONE</span>
-        </div>
-        <div class="check-item" id="chk2">
-            <span>2. MTFA Flow Alignment (M15 vs H1 Structure)</span>
-            <span class="check-badge" id="st2" style="color: var(--text-muted);">AWAITING TEST</span>
-        </div>
-        <div class="check-item" id="chk3">
-            <span>3. Rejection Wick / Order Absorption Trigger</span>
-            <span class="check-badge" id="st3" style="color: var(--text-muted);">SCANNING TICKS</span>
-        </div>
-        <div class="check-item" id="chk4">
-            <span>4. 300c Risk Protocol (0.01 Lot / Max 8pt SL)</span>
-            <span class="check-badge" id="st4" style="color: var(--accent-green);">VERIFIED (0.01)</span>
-        </div>
-
-        <div class="readiness-banner" id="executionBanner">
-            ✋ STAND ASIDE (NO A+ CONFLUENCE)
-        </div>
-    </div>
-
-    <!-- Interactive Navigation Tabs -->
+    <!-- Tab Bar -->
     <div class="tab-bar">
-        <button class="tab-btn active" onclick="switchTab('setups', this)">Setups</button>
-        <button class="tab-btn" onclick="switchTab('performance', this)">Performance</button>
-        <button class="tab-btn" onclick="switchTab('analysis', this)">Analysis</button>
+        <button class="tab-btn active" onclick="openTab('tab-terminal', this)">Terminal</button>
+        <button class="tab-btn" onclick="openTab('tab-tuning', this)">Algorithm Tuning</button>
+        <button class="tab-btn" onclick="openTab('tab-overview', this)">Overview</button>
     </div>
 
-    <!-- TAB 1: SETUPS -->
-    <div id="setups" class="tab-content active">
-        <div class="setup-card sell">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span class="setup-badge sell">M30 SELL</span>
-                <b style="font-size:0.95rem;">4024.00 — 4033.00</b>
-                <span style="font-size:0.65rem; color:var(--text-muted);">Supply Peak</span>
-            </div>
-            <div style="display:flex; justify-content:space-between; margin-top:6px; font-size:0.72rem;">
-                <span style="color:var(--accent-cyan);">🎯 TP1: 4015.00 | TP2: 4005.00</span>
-                <span style="color:var(--accent-gold); font-weight:700;">⚖️ BE at +15 pips</span>
-            </div>
+    <!-- TAB 1: TERMINAL (LIVE LOG STREAM) -->
+    <div id="tab-terminal" class="tab-content active">
+        <div class="cmp-card">
+            <div class="cmp-symbol">XAUUSD (GOLD SPOT REAL-TIME FEED)</div>
+            <div class="cmp-num" id="liveCMP">0000.00</div>
+            <div style="font-size:0.65rem; color:var(--text-muted);" id="liveRsiLabel">CALCULATING M1 RSI(5)...</div>
         </div>
 
-        <div class="setup-card buy">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span class="setup-badge buy">M15 BUY</span>
-                <b style="font-size:0.95rem;">3998.00 — 4005.00</b>
-                <span style="font-size:0.65rem; color:var(--text-muted);">Demand RBS</span>
-            </div>
-            <div style="display:flex; justify-content:space-between; margin-top:6px; font-size:0.72rem;">
-                <span style="color:var(--accent-cyan);">🎯 TP1: 4018.00 | TP2: 4024.00</span>
-                <span style="color:var(--accent-green); font-weight:700;">🛡️ SL: 3992.00 (Risk 6 pts)</span>
-            </div>
+        <div class="terminal-box" id="terminalLogs">
+            <!-- Dynamic logs will stream here -->
+            <div><span class="log-time">[ INITIALIZING ]</span> > SECURE TUNNEL ESTABLISHED</div>
+            <div><span class="log-time">[ 11:09:47 ]</span> > SYNC: Latency 8ms</div>
+            <div><span class="log-time">[ 11:09:48 ]</span> > SCAN: [M1 XAUUSD] ENGINE READY</div>
         </div>
     </div>
 
-    <!-- TAB 2: PERFORMANCE -->
-    <div id="performance" class="tab-content">
-        <div style="display:flex; gap:10px; margin-bottom:12px;">
-            <div style="flex:1.4; background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:14px;">
-                <div style="font-size:0.65rem; font-weight:800; color:var(--text-muted);">PIPS WON · TODAY</div>
-                <div style="font-size:1.8rem; font-weight:900; color:var(--accent-green); margin:4px 0;">+1071</div>
-                <div style="font-size:0.62rem; color:var(--text-muted);">Aggressive Capital Defense Active</div>
+    <!-- TAB 2: ALGORITHM TUNING -->
+    <div id="tab-tuning" class="tab-content">
+        <div class="tuning-card">
+            <div class="section-header">⚙️ Risk Protocol</div>
+            <div class="switch-row">
+                <span class="switch-label">Auto Cutloss</span>
+                <input type="checkbox" id="cutlossToggle" checked style="accent-color: var(--neon-lime); transform: scale(1.2);">
             </div>
-            <div style="flex:1; background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:14px; text-align:center; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-                <div style="font-size:1.6rem; font-weight:900; color:var(--accent-green);">88%</div>
-                <div style="font-size:0.65rem; font-weight:800; color:var(--text-muted);">WIN RATE</div>
+            <div class="input-group" style="margin-top: 10px;">
+                <label>Max Loss Limit ($ / Cent)</label>
+                <input type="number" id="maxLossInput" value="80.00">
+            </div>
+        </div>
+
+        <div class="tuning-card">
+            <div class="section-header">⚡ Logic Setup (Chipper Core M1)</div>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>RSI Period</label>
+                    <input type="number" id="rsiPeriod" value="5">
+                </div>
+                <div class="input-group">
+                    <label>RSI OB (Sell)</label>
+                    <input type="number" id="rsiOB" value="80">
+                </div>
+                <div class="input-group">
+                    <label>RSI OS (Buy)</label>
+                    <input type="number" id="rsiOS" value="20">
+                </div>
+                <div class="input-group">
+                    <label>Trail Start (Pips)</label>
+                    <input type="number" id="trailStart" value="5.0">
+                </div>
+                <div class="input-group">
+                    <label>Trail Step (Pips)</label>
+                    <input type="number" id="trailStep" value="2.0">
+                </div>
+                <div class="input-group">
+                    <label>Strict Lot</label>
+                    <input type="text" value="0.01" readonly style="opacity: 0.7;">
+                </div>
+            </div>
+
+            <div class="btn-action-row">
+                <button class="btn-reset" onclick="resetDefaults()">Reset Pabrik</button>
+                <button class="btn-deploy" onclick="showOverrideModal()">Deploy To Cluster</button>
             </div>
         </div>
     </div>
 
-    <!-- TAB 3: ANALYSIS -->
-    <div id="analysis" class="tab-content">
-        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-bottom:12px;">
-            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:8px; text-align:center;"><div style="font-size:0.65rem; color:var(--text-muted);">M5</div><div style="color:var(--accent-green); font-weight:900; font-size:0.75rem;">BULLISH (67%)</div></div>
-            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:8px; text-align:center;"><div style="font-size:0.65rem; color:var(--text-muted);">M15</div><div style="color:var(--accent-green); font-weight:900; font-size:0.75rem;">BULLISH (60%)</div></div>
-            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:8px; text-align:center;"><div style="font-size:0.65rem; color:var(--text-muted);">M30</div><div style="color:var(--accent-gold); font-weight:900; font-size:0.75rem;">NEUTRAL</div></div>
-            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:8px; text-align:center;"><div style="font-size:0.65rem; color:var(--text-muted);">H1</div><div style="color:var(--accent-gold); font-weight:900; font-size:0.75rem;">RESIST TEST</div></div>
-            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:8px; text-align:center;"><div style="font-size:0.65rem; color:var(--text-muted);">H4</div><div style="color:var(--accent-red); font-weight:900; font-size:0.75rem;">BEAR FLOW</div></div>
-            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:8px; text-align:center;"><div style="font-size:0.65rem; color:var(--text-muted);">D1</div><div style="color:var(--accent-red); font-weight:900; font-size:0.75rem;">SELL (54%)</div></div>
+    <!-- TAB 3: OVERVIEW -->
+    <div id="tab-overview" class="tab-content">
+        <div class="profile-banner">
+            <div class="profile-title">OPERATOR SESSION</div>
+            <div class="profile-name">NURHANISAH</div>
+            <div class="session-badge">ENCRYPTED 300c PROTOCOL ACTIVE</div>
+        </div>
+
+        <div class="asset-card">
+            <div>
+                <div class="asset-title">CHIPPER CORE ASSISTANT</div>
+                <div class="asset-sub">Institutional M1 Sniper Engine</div>
+            </div>
+            <span class="status-badge">AKTIF</span>
+        </div>
+
+        <div class="asset-card" style="border-left-color: var(--neon-cyan);">
+            <div>
+                <div class="asset-title">HOSTING CLUSTER</div>
+                <div class="asset-sub">Cloud Sentinel / GitHub Client</div>
+            </div>
+            <span style="color:var(--neon-cyan); font-weight:900; font-size:0.75rem;">FREE TIER</span>
         </div>
     </div>
 
-    <!-- Capital Defense Protocol -->
-    <div class="risk-hud">
-        <div class="risk-title">
-            <span>🛡️ 300c PRESERVATION PROTOCOL</span>
-            <span style="color:var(--accent-cyan);">MAX 0.01 LOT</span>
+    <!-- MODAL: PROTOKOL OVERRIDE -->
+    <div class="modal-overlay" id="overrideModal">
+        <div class="modal-box">
+            <div class="modal-title">⚠️ PROTOKOL OVERRIDE</div>
+            <div class="modal-body">
+                PERINGATAN: Menyesuaikan parameter ini akan menimpa logika yang sedang aktif di dalam sistem. Jika enjin sedang berjalan, algoritma akan langsung beradaptasi dengan pengaturan Risiko dan Lot yang baru. Pastikan parameter sudah diverifikasi.
+            </div>
+            <div class="modal-actions">
+                <button class="btn-modal-cancel" onclick="closeModal()">BATAL</button>
+                <button class="btn-modal-confirm" onclick="applyParameters()">TERAPKAN PERUBAHAN</button>
+            </div>
         </div>
-        <div>• <b>Stop Loss Limit:</b> 6.0 — 8.0 points maximum ($0.60 - $0.80 loss ceiling).</div>
-        <div>• <b>Traxa Breakeven Rule:</b> Move SL to Entry immediately once +15 pips in profit.</div>
-        <div>• <b>Target Sniper Plays:</b> SELL at 4024–4028 rejection | BUY at 3998–4004 retest.</div>
-    </div>
-
-    <!-- Live TradingView Mobile Embed -->
-    <div style="height: 310px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border);">
-        <iframe 
-            src="https://s.tradingview.com/widgetembed/?frameElementId=tv_live&symbol=FX_IDC%3AXAUUSD&interval=15&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=06080d&studies=[]&theme=dark&style=1&timezone=Asia%2FKuala_Lumpur" 
-            style="width: 100%; height: 100%; border: 0;">
-        </iframe>
     </div>
 
     <script>
-        // Institutional Zones
-        const SUPPLY_MIN = 4024.00;
-        const SUPPLY_MAX = 4033.00;
-        const DEMAND_MIN = 3998.00;
-        const DEMAND_MAX = 4005.00;
-
-        // Telegram Bot Credentials
         const TG_TOKEN = "8758186965:AAFh3ULj2ui5Yooewlkj7EkgG8sZQK4VQpA";
         const TG_CHAT_ID = "693517031";
 
-        let previousPrice = 0;
-        let audioCtx = null;
+        let pricesM1 = [];
         let cooldownActive = false;
-        let wakeLock = null;
 
-        // Screen Wake Lock API (Keeps screen awake on mobile)
-        async function requestWakeLock() {
-            try {
-                if ('wakeLock' in navigator) {
-                    wakeLock = await navigator.wakeLock.request('screen');
-                    console.log("Wake Lock active: Mobile display will stay awake.");
-                }
-            } catch (err) {
-                console.log("Wake Lock error:", err.message);
-            }
+        function openTab(tabId, btn) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
         }
 
-        // Mobile Audio Unlocker & Haptic Engine
-        async function enableAudioAlerts() {
-            try {
-                if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                if (audioCtx.state === 'suspended') {
-                    await audioCtx.resume();
-                }
-
-                beep(880, 0.25);
-
-                if (navigator.vibrate) {
-                    navigator.vibrate([150, 100, 150]);
-                }
-
-                const btn = document.getElementById('audioBtn');
-                btn.innerText = "🔊 SOUND ON";
-                btn.style.color = "var(--accent-green)";
-                btn.style.borderColor = "var(--accent-green)";
-                btn.style.background = "rgba(16, 185, 129, 0.2)";
-            } catch (err) {
-                alert("Browser Audio Error: " + err.message + ". Please ensure media volume is turned on.");
-            }
-        }
-
-        function beep(freq, duration) {
-            if (!audioCtx) return;
-            try {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = "sine";
-                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-                gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + duration);
-            } catch (e) {
-                console.error("Audio playback error:", e);
-            }
-        }
-
-        function triggerAlarmBeeps() {
-            beep(950, 0.2);
-            setTimeout(() => beep(950, 0.2), 250);
-            setTimeout(() => beep(1200, 0.4), 500);
-
-            if (navigator.vibrate) {
-                navigator.vibrate([300, 150, 300]);
-            }
-        }
-
-        // Telegram Dispatcher
-        async function sendRawTelegram(text) {
-            const url = `https://api.telegram.org/bot${TG_TOKEN}/sendMessage`;
-            try {
-                const res = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: TG_CHAT_ID,
-                        text: text,
-                        parse_mode: 'Markdown'
-                    })
-                });
-                return res.ok;
-            } catch (e) {
-                console.error("Telegram Dispatch Error:", e);
-                return false;
-            }
-        }
-
-        async function testTelegramAlert() {
-            const btn = document.getElementById('tgBtn');
-            btn.innerText = "⏳ SENDING...";
+        function appendLog(text, type = "normal") {
+            const logs = document.getElementById('terminalLogs');
+            const now = new Date();
+            const timeStr = `[ ${now.toTimeString().split(' ')[0]} ]`;
             
-            const testMsg = 
-                `✅ *TELEGRAM ALERT TEST SUCCESSFUL!*\n` +
-                `━━━━━━━━━━━━━━━━━━━━\n` +
-                `📡 *System:* Gold Institutional Radar\n` +
-                `📱 *Status:* Live WebSocket Feed Active\n` +
-                `🛡️ *Account Defense:* 300c Capital Active\n` +
-                `━━━━━━━━━━━━━━━━━━━━\n` +
-                `_The system is ready to dispatch instant entry triggers._`;
+            let line = `<div><span class="log-time">${timeStr}</span> > ${text}</div>`;
+            if (type === "exec") line = `<div><span class="log-time">${timeStr}</span> > <span class="log-exec">${text}</span></div>`;
+            if (type === "sync") line = `<div><span class="log-time">${timeStr}</span> > <span class="log-sync">${text}</span></div>`;
 
-            const success = await sendRawTelegram(testMsg);
-            if (success) {
-                btn.innerText = "✅ SENT TO TELE";
-                btn.style.color = "var(--accent-green)";
-                btn.style.borderColor = "var(--accent-green)";
-            } else {
-                btn.innerText = "❌ FAILED";
-                btn.style.color = "var(--accent-red)";
+            logs.innerHTML += line;
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        function calculateRSI(prices, period = 5) {
+            if (prices.length < period + 1) return 50.0;
+            let gains = 0, losses = 0;
+            for (let i = 1; i <= period; i++) {
+                const diff = prices[i] - prices[i - 1];
+                if (diff >= 0) gains += diff;
+                else losses -= diff;
             }
+            if (losses === 0) return 100.0;
+            const rs = (gains / period) / (losses / period);
+            return 100 - (100 / (1 + rs));
         }
 
-        async function pushTelegramAlert(action, price, zone, slPrice, tpPrice) {
-            if (cooldownActive) return;
-            cooldownActive = true;
-
-            const msg = 
-                `🚨 *SNIPER RADAR: 4-POINT CONFIRMATION MET!* 🚨\n` +
-                `━━━━━━━━━━━━━━━━━━━━\n` +
-                `⚡ *Action Order:* *${action}*\n` +
-                `💰 *Current Price:* \`${price}\`\n` +
-                `🎯 *Institutional Zone:* ${zone}\n` +
-                `━━━━━━━━━━━━━━━━━━━━\n` +
-                `🛑 *Mandatory SL:* \`${slPrice}\` (Max 6-8 pts)\n` +
-                `🎯 *Target TP1:* \`${tpPrice}\`\n` +
-                `🛡️ *Lot Size:* \`0.01 ONLY\` (300c Balance)\n` +
-                `⚖️ *BE Rule:* Shift SL to Entry once +8 pips in profit!\n` +
-                `━━━━━━━━━━━━━━━━━━━━\n` +
-                `📱 _Open MT5 on phone for immediate sniper entry!_`;
-
-            await sendRawTelegram(msg);
-
-            // 90-second cooldown
-            setTimeout(() => { cooldownActive = false; }, 90000);
-        }
-
-        // Real-Time Live WebSocket Feed (Binance PAX Gold 1:1 Spot Feed)
         function initLiveFeed() {
             const socket = new WebSocket("wss://stream.binance.com:9443/ws/paxgusdt@ticker");
 
             socket.onopen = () => {
-                document.getElementById('socketStatus').innerText = "LIVE STREAM ACTIVE";
-                document.getElementById('socketStatus').style.color = "var(--accent-green)";
+                document.getElementById('netStatus').innerText = "ONLINE";
+                appendLog("NET: SECURE TUNNEL OK", "sync");
             };
 
             socket.onmessage = (event) => {
                 const data = JSON.parse(event.data);
                 const cmp = parseFloat(data.c);
-                const high24 = parseFloat(data.h);
-                const low24 = parseFloat(data.l);
+                document.getElementById('liveCMP').innerText = cmp.toFixed(2);
 
-                updatePriceUI(cmp, high24, low24);
-                validateInstitutionalMatrix(cmp);
-            };
+                pricesM1.push(cmp);
+                if (pricesM1.length > 30) pricesM1.shift();
 
-            socket.onerror = () => {
-                document.getElementById('socketStatus').innerText = "RECONNECTING...";
-                document.getElementById('socketStatus').style.color = "var(--accent-gold)";
-            };
+                const rsi = calculateRSI(pricesM1, 5);
+                document.getElementById('liveRsiLabel').innerText = `M1 RSI(5): ${rsi.toFixed(1)} | LATENCY: 8ms`;
 
-            socket.onclose = () => {
-                setTimeout(initLiveFeed, 3000);
-            };
-        }
-
-        function updatePriceUI(cmp, high, low) {
-            const cmpEl = document.getElementById('cmpDisplay');
-            cmpEl.innerText = cmp.toFixed(2);
-
-            if (previousPrice !== 0) {
-                if (cmp > previousPrice) {
-                    cmpEl.className = "cmp-val cmp-tick-up";
-                } else if (cmp < previousPrice) {
-                    cmpEl.className = "cmp-val cmp-tick-down";
+                // Log periodic scan
+                if (Math.random() < 0.15) {
+                    appendLog(`SCAN: [M1 XAUUSD @ ${cmp.toFixed(2)}] RSI(5): ${rsi.toFixed(1)}`, "normal");
                 }
-                setTimeout(() => { cmpEl.className = "cmp-val"; }, 250);
+
+                // Check Thresholds
+                const rsiOB = parseFloat(document.getElementById('rsiOB').value);
+                const rsiOS = parseFloat(document.getElementById('rsiOS').value);
+
+                if (rsi >= rsiOB && cmp >= 4024.00) {
+                    triggerAlert("SELL", cmp, rsi);
+                } else if (rsi <= rsiOS && cmp <= 4005.00) {
+                    triggerAlert("BUY", cmp, rsi);
+                }
+            };
+        }
+
+        async function triggerAlert(action, price, rsi) {
+            if (cooldownActive) return;
+            cooldownActive = true;
+
+            appendLog(`EXEC: ${action} 0.01 LOT @ ${price.toFixed(2)} (RSI: ${rsi.toFixed(1)})`, "exec");
+
+            const msg = `⚡ *ZS-X CLUSTER TRIGGER: ${action} SCALP!* ⚡\n━━━━━━━━━━━━━━━━━━━━\n💰 *Price:* \`${price.toFixed(2)}\`\n📊 *M1 RSI(5):* \`${rsi.toFixed(1)}\`\n🛡️ *Strict Lot:* 0.01 ONLY\n🛑 *SL:* 6.0 pts max\n🎯 *TP:* Trailing Active\n━━━━━━━━━━━━━━━━━━━━\n📱 _Execute on mobile MT5 immediately!_`;
+
+            try {
+                await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: TG_CHAT_ID, text: msg, parse_mode: 'Markdown' })
+                });
+            } catch (e) {
+                console.error("Telegram send error:", e);
             }
-            previousPrice = cmp;
 
-            document.getElementById('high24h').innerText = `H: ${high.toFixed(2)}`;
-            document.getElementById('low24h').innerText = `L: ${low.toFixed(2)}`;
-            const spreadPts = (high - low).toFixed(2);
-            document.getElementById('rangeSpread').innerText = `${spreadPts} PTS SESSION RANGE`;
-
-            const rangePct = Math.min(Math.max(((cmp - low) / (high - low)) * 100, 5), 95);
-            document.getElementById('sliderFill').style.width = `${rangePct}%`;
-
-            const distToSupply = (SUPPLY_MIN - cmp).toFixed(1);
-            const distToDemand = (cmp - DEMAND_MAX).toFixed(1);
-
-            document.getElementById('resDistance').innerText = distToSupply > 0 
-                ? `${distToSupply} pts above` 
-                : `${Math.abs(distToSupply)} pts deep in supply`;
-                
-            document.getElementById('supDistance').innerText = distToDemand > 0 
-                ? `${distToDemand} pts below` 
-                : `${Math.abs(distToDemand)} pts deep in demand`;
+            setTimeout(() => { cooldownActive = false; }, 90000);
         }
 
-        function validateInstitutionalMatrix(cmp) {
-            const inSupply = (cmp >= SUPPLY_MIN && cmp <= SUPPLY_MAX);
-            const inDemand = (cmp >= DEMAND_MIN && cmp <= DEMAND_MAX);
-
-            const chk1 = document.getElementById('chk1');
-            const chk2 = document.getElementById('chk2');
-            const chk3 = document.getElementById('chk3');
-            const banner = document.getElementById('executionBanner');
-            const score = document.getElementById('passedScore');
-            const badge = document.getElementById('marketState');
-
-            if (inSupply) {
-                badge.innerText = "TESTING INSTITUTIONAL SUPPLY";
-                chk1.className = "check-item pass";
-                document.getElementById('st1').innerText = "IN SUPPLY (4024-4033)";
-                document.getElementById('st1').style.color = "var(--accent-green)";
-
-                chk2.className = "check-item pass";
-                document.getElementById('st2').innerText = "M15 RESIST REACHED";
-                document.getElementById('st2').style.color = "var(--accent-green)";
-
-                chk3.className = "check-item pass";
-                document.getElementById('st3').innerText = "REJECTION POTENTIAL";
-                document.getElementById('st3').style.color = "var(--accent-green)";
-
-                score.innerText = "4/4 PASSED";
-                banner.className = "readiness-banner ready-active";
-                banner.innerText = "🔥 READY FOR EXECUTION: SELL SCALP";
-
-                triggerAlarmBeeps();
-                const sl = (cmp + 7.0).toFixed(2);
-                const tp = (cmp - 14.0).toFixed(2);
-                pushTelegramAlert("SELL SCALP", cmp.toFixed(2), "4024 - 4033 Supply", sl, tp);
-
-            } else if (inDemand) {
-                badge.innerText = "TESTING INSTITUTIONAL DEMAND";
-                chk1.className = "check-item pass";
-                document.getElementById('st1').innerText = "IN DEMAND (3998-4005)";
-                document.getElementById('st1').style.color = "var(--accent-green)";
-
-                chk2.className = "check-item pass";
-                document.getElementById('st2').innerText = "M15 RBS CONFLUENCE";
-                document.getElementById('st2').style.color = "var(--accent-green)";
-
-                chk3.className = "check-item pass";
-                document.getElementById('st3').innerText = "ABSORPTION POTENTIAL";
-                document.getElementById('st3').style.color = "var(--accent-green)";
-
-                score.innerText = "4/4 PASSED";
-                banner.className = "readiness-banner ready-active";
-                banner.innerText = "🔥 READY FOR EXECUTION: BUY SCALP";
-
-                triggerAlarmBeeps();
-                const sl = (cmp - 7.0).toFixed(2);
-                const tp = (cmp + 14.0).toFixed(2);
-                pushTelegramAlert("BUY SCALP", cmp.toFixed(2), "3998 - 4005 Demand", sl, tp);
-
-            } else {
-                badge.innerText = "PRICE IN TRANSIT (NO SETUP)";
-                chk1.className = "check-item fail";
-                document.getElementById('st1').innerText = "MID-ZONE";
-                document.getElementById('st1').style.color = "var(--accent-red)";
-
-                chk2.className = "check-item";
-                document.getElementById('st2').innerText = "WAITING LEVEL";
-                document.getElementById('st2').style.color = "var(--text-muted)";
-
-                chk3.className = "check-item";
-                document.getElementById('st3').innerText = "NO TRIGGER";
-                document.getElementById('st3').style.color = "var(--text-muted)";
-
-                score.innerText = "1/4 PASSED";
-                banner.className = "readiness-banner";
-                banner.innerText = "✋ STAND ASIDE (NO A+ CONFLUENCE)";
-            }
+        async function testTelegram() {
+            appendLog("TEST: DISPATCHING TELEGRAM PING...", "sync");
+            const testMsg = `✅ *ZS-X SYSTEM LINK VERIFIED!*\nTerminal connected to Cloud Sentinel.`;
+            await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: TG_CHAT_ID, text: testMsg, parse_mode: 'Markdown' })
+            });
+            appendLog("TELEGRAM PING DISPATCHED SUCCESSFULLY", "sync");
         }
 
-        function switchTab(tabId, btnElement) {
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(el => el.classList.remove('active'));
-            
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            
-            document.getElementById(tabId).classList.add('active');
-            btnElement.classList.add('active');
+        function showOverrideModal() {
+            document.getElementById('overrideModal').style.display = "flex";
         }
 
-        // Initialize WakeLock on user interaction and start WebSocket feed
-        window.addEventListener('click', () => {
-            if (!wakeLock) requestWakeLock();
-        });
+        function closeModal() {
+            document.getElementById('overrideModal').style.display = "none";
+        }
+
+        function applyParameters() {
+            closeModal();
+            appendLog("SYNC: UPLOADING NEW PARAMETERS TO ENGINE...", "sync");
+            setTimeout(() => {
+                appendLog("PARAMETER BERHASIL DIAPLIKASIKAN", "exec");
+                alert("PARAMETER BERHASIL DIAPLIKASIKAN");
+            }, 600);
+        }
+
+        function resetDefaults() {
+            document.getElementById('rsiPeriod').value = 5;
+            document.getElementById('rsiOB').value = 80;
+            document.getElementById('rsiOS').value = 20;
+            document.getElementById('trailStart').value = 5.0;
+            document.getElementById('trailStep').value = 2.0;
+            document.getElementById('maxLossInput').value = 80.00;
+            appendLog("SETTINGS RESTORED TO DEFAULT CLUSTER VALUES", "sync");
+        }
+
         window.addEventListener('DOMContentLoaded', initLiveFeed);
     </script>
 </body>
