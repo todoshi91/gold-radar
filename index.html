@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ZS-X // MOBILE SCALP & TELEGRAM DISPATCHER</title>
+    <title>ZS-X // KAWALAN SCALP & SWING MUDAH ALIH</title>
     <style>
         :root {
-            --bg-deep: #05070b;
-            --bg-card: #0a0f18;
+            --bg-gelap: #05070b;
+            --bg-kad: #0a0f18;
             --bg-input: #111827;
-            --border: #1f293d;
-            --text-main: #f8fafc;
-            --text-muted: #64748b;
-            --neon-green: #10b981;
-            --neon-lime: #a3e635;
-            --neon-red: #f43f5e;
-            --neon-gold: #f59e0b;
-            --neon-cyan: #06b6d4;
+            --garis: #1f293d;
+            --teks-utama: #f8fafc;
+            --teks-kelabu: #64748b;
+            --hijau-neon: #10b981;
+            --hijau-pucuk: #a3e635;
+            --merah-neon: #f43f5e;
+            --emas-neon: #f59e0b;
+            --sian-neon: #06b6d4;
+            --ungu-neon: #c084fc;
         }
 
         * {
@@ -28,22 +29,22 @@
         }
 
         body {
-            background-color: var(--bg-deep);
-            color: var(--text-main);
+            background-color: var(--bg-gelap);
+            color: var(--teks-utama);
             padding: 10px 12px 70px 12px;
             overflow-x: hidden;
         }
 
-        /* Top Header */
-        .top-bar {
+        /* Palang Atas */
+        .palang-atas {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding-bottom: 10px;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--garis);
             margin-bottom: 12px;
         }
-        .brand-title {
+        .tajuk-sistem {
             font-size: 0.95rem;
             font-weight: 900;
             letter-spacing: 0.1em;
@@ -52,49 +53,49 @@
             align-items: center;
             gap: 6px;
         }
-        .brand-title span { color: var(--neon-cyan); }
-        .status-cluster {
+        .tajuk-sistem span { color: var(--sian-neon); }
+        .kelompok-status {
             display: flex;
             align-items: center;
             gap: 6px;
         }
-        .live-pill {
+        .lencana-siaran {
             font-size: 0.62rem;
             font-weight: 800;
             padding: 3px 8px;
             border-radius: 4px;
             background: rgba(16, 185, 129, 0.15);
-            color: var(--neon-green);
+            color: var(--hijau-neon);
             border: 1px solid rgba(16, 185, 129, 0.3);
             text-transform: uppercase;
         }
-        .tg-pill {
+        .lencana-tg {
             font-size: 0.62rem;
             font-weight: 800;
             padding: 3px 8px;
             border-radius: 4px;
             background: rgba(6, 182, 212, 0.15);
-            color: var(--neon-cyan);
+            color: var(--sian-neon);
             border: 1px solid rgba(6, 182, 212, 0.3);
         }
 
-        /* Navigation Tab Mobile */
-        .nav-tabs {
+        /* Bar Navigasi Tab */
+        .bar-navigasi {
             display: flex;
             background: #090d16;
             padding: 3px;
             border-radius: 10px;
             margin-bottom: 12px;
-            border: 1px solid var(--border);
-            gap: 4px;
+            border: 1px solid var(--garis);
+            gap: 3px;
         }
-        .tab-item {
+        .butang-tab {
             flex: 1;
-            padding: 10px 0;
+            padding: 9px 0;
             text-align: center;
-            font-size: 0.68rem;
+            font-size: 0.65rem;
             font-weight: 800;
-            color: var(--text-muted);
+            color: var(--teks-kelabu);
             border: none;
             background: transparent;
             cursor: pointer;
@@ -102,43 +103,43 @@
             text-transform: uppercase;
             transition: all 0.2s ease;
         }
-        .tab-item.active {
+        .butang-tab.aktif {
             background: #1e293b;
             color: #ffffff;
             border: 1px solid #334155;
             box-shadow: 0 2px 6px rgba(0,0,0,0.5);
         }
 
-        .tab-panel { display: none; }
-        .tab-panel.active { display: block; }
+        .panel-tab { display: none; }
+        .panel-tab.aktif { display: block; }
 
-        /* CMP Main Card */
-        .price-card {
+        /* Kad Harga Semasa */
+        .kad-harga {
             background: linear-gradient(180deg, #0e1726 0%, #060911 100%);
-            border: 1px solid var(--border);
+            border: 1px solid var(--garis);
             border-radius: 14px;
             padding: 14px 12px;
             text-align: center;
             margin-bottom: 10px;
         }
-        .price-tag {
+        .label-suapan {
             font-size: 0.65rem;
             font-weight: 800;
-            color: var(--neon-gold);
+            color: var(--emas-neon);
             letter-spacing: 0.08em;
         }
-        .price-val {
+        .angka-harga {
             font-size: 2.3rem;
             font-weight: 900;
-            color: var(--neon-gold);
+            color: var(--emas-neon);
             margin: 2px 0;
             font-variant-numeric: tabular-nums;
         }
 
-        /* Signal Status Banner */
-        .signal-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
+        /* Kotak Status Strategi */
+        .kotak-status {
+            background: var(--bg-kad);
+            border: 1px solid var(--garis);
             border-radius: 12px;
             padding: 12px;
             margin-bottom: 10px;
@@ -146,73 +147,74 @@
             align-items: center;
             justify-content: space-between;
         }
-        .signal-title {
-            font-size: 0.65rem;
-            color: var(--text-muted);
+        .label-kecil {
+            font-size: 0.62rem;
+            color: var(--teks-kelabu);
             font-weight: 800;
             text-transform: uppercase;
         }
-        .signal-text {
+        .teks-isyarat {
             font-size: 0.95rem;
             font-weight: 900;
             letter-spacing: 0.05em;
         }
 
-        /* Sharp V/A Levels Display */
-        .snr-grid {
+        /* Paras SnR V/A */
+        .grid-snr {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
             margin-bottom: 10px;
         }
-        .snr-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
+        .kad-snr {
+            background: var(--bg-kad);
+            border: 1px solid var(--garis);
             border-radius: 10px;
             padding: 10px;
         }
-        .snr-card.resistance { border-left: 4px solid var(--neon-red); }
-        .snr-card.support { border-left: 4px solid var(--neon-green); }
-        .snr-label {
+        .kad-snr.rintangan { border-left: 4px solid var(--merah-neon); }
+        .kad-snr.sokongan { border-left: 4px solid var(--hijau-neon); }
+        
+        .label-snr {
             font-size: 0.6rem;
             font-weight: 800;
-            color: var(--text-muted);
+            color: var(--teks-kelabu);
             text-transform: uppercase;
         }
-        .snr-price {
+        .harga-snr {
             font-size: 1.05rem;
             font-weight: 900;
             margin-top: 2px;
         }
 
-        /* Terminal Console */
-        .console-stream {
+        /* Konsol Terminal */
+        .terminal-log {
             background: #020408;
             border: 1px solid #1e293b;
             border-radius: 10px;
             padding: 10px;
             font-family: "Courier New", Courier, monospace;
             font-size: 0.7rem;
-            height: 200px;
+            height: 190px;
             overflow-y: auto;
             color: #94a3b8;
             line-height: 1.5;
             margin-bottom: 10px;
         }
-        .c-time { color: #64748b; }
-        .c-exec { color: var(--neon-lime); font-weight: 900; }
-        .c-alert { color: var(--neon-red); font-weight: 900; }
-        .c-sync { color: var(--neon-cyan); }
+        .masa-log { color: #64748b; }
+        .log-laksana { color: var(--hijau-pucuk); font-weight: 900; }
+        .log-amaran { color: var(--merah-neon); font-weight: 900; }
+        .log-selaras { color: var(--sian-neon); }
 
-        /* Order Copy Helper Card */
-        .card-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
+        /* Kad Pembantu Pesanan */
+        .kad-kotak {
+            background: var(--bg-kad);
+            border: 1px solid var(--garis);
             border-radius: 12px;
             padding: 12px;
             margin-bottom: 10px;
         }
-        .helper-row {
+        .baris-pembantu {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -220,8 +222,8 @@
             border-bottom: 1px solid #141c2c;
             font-size: 0.78rem;
         }
-        .helper-row:last-child { border-bottom: none; }
-        .copy-btn {
+        .baris-pembantu:last-child { border-bottom: none; }
+        .butang-salin {
             background: #1e293b;
             border: 1px solid #334155;
             color: #ffffff;
@@ -232,70 +234,93 @@
             cursor: pointer;
         }
 
-        /* Preset Switchers */
-        .session-toggle-box {
+        /* Kad Zon Swing */
+        .kad-zon-swing {
+            background: #0d1424;
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+        .kepala-swing {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .jenis-swing {
+            font-size: 0.75rem;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+        }
+        .status-swing {
+            font-size: 0.62rem;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Penukar Sesi Pantas */
+        .kotak-pilih-sesi {
             display: flex;
             gap: 8px;
             margin-bottom: 12px;
         }
-        .session-btn {
+        .butang-sesi {
             flex: 1;
             padding: 12px 6px;
             border-radius: 8px;
             font-size: 0.75rem;
             font-weight: 900;
-            border: 1px solid var(--border);
+            border: 1px solid var(--garis);
             background: #0d131f;
-            color: var(--text-muted);
+            color: var(--teks-kelabu);
             cursor: pointer;
             text-transform: uppercase;
         }
-        .session-btn.selected {
+        .butang-sesi.dipilih {
             background: rgba(6, 182, 212, 0.15);
-            border-color: var(--neon-cyan);
-            color: var(--neon-cyan);
-            box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+            border-color: var(--sian-neon);
+            color: var(--sian-neon);
         }
 
-        /* Fields */
-        .field-group {
+        /* Borang Input */
+        .ruang-input {
             margin-bottom: 10px;
         }
-        .field-group label {
+        .ruang-input label {
             display: block;
             font-size: 0.65rem;
             font-weight: 800;
-            color: var(--text-muted);
+            color: var(--teks-kelabu);
             text-transform: uppercase;
             margin-bottom: 4px;
         }
-        .field-group input {
+        .ruang-input input {
             width: 100%;
             background: var(--bg-input);
-            border: 1px solid var(--border);
+            border: 1px solid var(--garis);
             border-radius: 8px;
             padding: 10px;
             color: #ffffff;
             font-size: 0.85rem;
             font-weight: 800;
             outline: none;
+            text-align: center;
         }
 
-        /* Toggle Switch Row */
-        .toggle-row {
+        .baris-suis {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px 0;
             border-bottom: 1px solid #141c2c;
-        }
-        .toggle-row span {
             font-size: 0.75rem;
             font-weight: 800;
         }
 
-        /* Buttons */
-        .btn-full {
+        /* Butang Sentuhan Mudah Alih */
+        .butang-penuh {
             width: 100%;
             padding: 13px;
             border-radius: 10px;
@@ -307,524 +332,619 @@
             cursor: pointer;
             margin-top: 6px;
         }
-        .btn-lime {
+        .butang-hijau {
             background: linear-gradient(135deg, #84cc16 0%, #4d7c0f 100%);
             color: #000;
             box-shadow: 0 4px 14px rgba(132, 204, 22, 0.3);
         }
-        .btn-cyan {
+        .butang-sian {
             background: rgba(6, 182, 212, 0.15);
-            border: 1px solid var(--neon-cyan);
-            color: var(--neon-cyan);
+            border: 1px solid var(--sian-neon);
+            color: var(--sian-neon);
         }
-        .btn-tg {
+        .butang-telegram {
             background: #229ed9;
             color: #ffffff;
             margin-top: 8px;
+        }
+        .butang-reset {
+            background: #141b28;
+            border: 1px solid #2d3748;
+            color: var(--teks-kelabu);
         }
     </style>
 </head>
 <body>
 
-    <!-- Top Header -->
-    <div class="top-bar">
-        <div class="brand-title">ZS-<span>X</span> MOBILE</div>
-        <div class="status-cluster">
-            <div class="tg-pill" id="tgStatus">TG: STANDBY</div>
-            <div class="live-pill" id="livePill">ONLINE</div>
+    <!-- Bahagian Atas -->
+    <div class="palang-atas">
+        <div class="tajuk-sistem">ZS-<span>X</span> DUAL</div>
+        <div class="kelompok-status">
+            <div class="lencana-tg" id="statusTG">TG: BERSIDIA</div>
+            <div class="lencana-siaran" id="statusSuapan">SIARAN: AKTIF</div>
         </div>
     </div>
 
-    <!-- Navigation Tabs -->
-    <div class="nav-tabs">
-        <button class="tab-item active" onclick="switchTab('tab-radar', this)">RADAR M1</button>
-        <button class="tab-item" onclick="switchTab('tab-helper', this)">ORDER MT5</button>
-        <button class="tab-item" onclick="switchTab('tab-telegram', this)">TELEGRAM</button>
-        <button class="tab-item" onclick="switchTab('tab-config', this)">TUNING</button>
+    <!-- Pilihan Tab Navigasi -->
+    <div class="bar-navigasi">
+        <button class="butang-tab aktif" onclick="tukarTab('tab-radar', this)">RADAR M1</button>
+        <button class="butang-tab" onclick="tukarTab('tab-swing', this)">SWING HTF</button>
+        <button class="butang-tab" onclick="tukarTab('tab-pesanan', this)">PESANAN MT5</button>
+        <button class="butang-tab" onclick="tukarTab('tab-telegram', this)">TELEGRAM</button>
+        <button class="butang-tab" onclick="tukarTab('tab-tetapan', this)">TETAPAN</button>
     </div>
 
-    <!-- TAB 1: RADAR UTAMA (M1 SNAPSHOT) -->
-    <div id="tab-radar" class="tab-panel active">
-        <!-- Live CMP -->
-        <div class="price-card">
-            <div class="price-tag">XAUUSD SPOT REAL-TIME (BINANCE FEED)</div>
-            <div class="price-val" id="cmpDisplay">0000.00</div>
-            <div style="font-size: 0.68rem; color: var(--text-muted);" id="m1SubLabel">RSI(5): 50.0 | EMA(20): 0000.00</div>
+    <!-- TAB 1: RADAR M1 (SCALPING HARIAN) -->
+    <div id="tab-radar" class="panel-tab aktif">
+        <div class="kad-harga">
+            <div class="label-suapan">XAUUSD SUAPAN HARGA MASA NYATA (BINANCE)</div>
+            <div class="angka-harga" id="paparanHarga">0000.00</div>
+            <div style="font-size: 0.68rem; color: var(--teks-kelabu);" id="labelSubM1">RSI(5): 50.0 | EMA(20): 0000.00</div>
         </div>
 
-        <!-- Strategy State -->
-        <div class="signal-box">
+        <div class="kotak-status">
             <div>
-                <div class="signal-title">STRATEGY STATUS</div>
-                <div class="signal-text" id="statusSignal" style="color: var(--text-muted);">MENUNGGU SETUP</div>
+                <div class="label-kecil">STATUS STRATEGI M1</div>
+                <div class="teks-isyarat" id="statusIsyarat" style="color: var(--teks-kelabu);">MENUNGGU SETUP</div>
             </div>
             <div style="text-align: right;">
-                <div class="signal-title">ACC RISK SHIELD</div>
-                <div style="font-size: 0.75rem; font-weight: 800; color: var(--neon-green);">300c OK (0.01 ONLY)</div>
+                <div class="label-kecil">PERISAI MODAL</div>
+                <div style="font-size: 0.75rem; font-weight: 800; color: var(--hijau-neon);">300c SELAMAT</div>
             </div>
         </div>
 
-        <!-- SnR V/A Levels -->
-        <div class="snr-grid">
-            <div class="snr-card resistance">
-                <div class="snr-label">SHARP 'A' (RESISTANCE)</div>
-                <div class="snr-price" id="sharpAVal" style="color: var(--neon-red);">4030.00</div>
+        <div class="grid-snr">
+            <div class="kad-snr rintangan">
+                <div class="label-snr">M1 'A' TAJAM (RINTANGAN)</div>
+                <div class="harga-snr" id="nilaiRintanganA" style="color: var(--merah-neon);">4030.00</div>
             </div>
-            <div class="snr-card support">
-                <div class="snr-label">SHARP 'V' (SUPPORT)</div>
-                <div class="snr-price" id="sharpVVal" style="color: var(--neon-green);">4005.00</div>
+            <div class="kad-snr sokongan">
+                <div class="label-snr">M1 'V' TAJAM (SOKONGAN)</div>
+                <div class="harga-snr" id="nilaiSokonganV" style="color: var(--hijau-neon);">4005.00</div>
             </div>
         </div>
 
-        <!-- Live Terminal Stream -->
-        <div class="console-stream" id="consoleLogs">
-            <div><span class="c-time">[ SYSTEM ]</span> > ZS-X MOBILE RADAR INITIALIZED</div>
-            <div><span class="c-time">[ TELEGRAM ]</span> > ALERT DISPATCHER READY</div>
+        <div class="terminal-log" id="logKonsol">
+            <div><span class="masa-log">[ SISTEM ]</span> > ENJIN PENGESAN M1 SEDIA</div>
+            <div><span class="masa-log">[ RADAR ]</span> > PEMANTAUAN ZON AYUNAN HTF AKTIF</div>
         </div>
 
-        <button class="btn-full btn-cyan" onclick="testTelegramPing()">HANTAR TEST PING TELEGRAM</button>
+        <button class="butang-penuh butang-sian" onclick="hantarUjianPing()">HANTAR UJIAN PING KE TELEGRAM</button>
     </div>
 
-    <!-- TAB 2: ORDER ASSISTANT MT5 (CALCULATOR & SALIN PANTAS) -->
-    <div id="tab-helper" class="tab-panel">
-        <div class="card-box">
-            <div style="font-size: 0.72rem; font-weight: 900; color: var(--neon-gold); margin-bottom: 8px;">
-                PARAMETER PESANAN MT5 (0.01 LOT)
+    <!-- TAB 2: SWING HTF (PEGANG SEMINGGU / SEBULAN) -->
+    <div id="tab-swing" class="panel-tab">
+        <div class="kad-kotak" style="border-left: 4px solid var(--ungu-neon);">
+            <div style="font-size: 0.72rem; font-weight: 900; color: var(--ungu-neon); margin-bottom: 4px;">
+                PROTOKOL SCALP-TO-SWING (SIFAR RISIKO)
             </div>
-            <div class="helper-row">
-                <span>ARAH TINDAKAN</span>
-                <strong id="recAction" style="color: var(--neon-cyan);">WAIT</strong>
-            </div>
-            <div class="helper-row">
-                <span>ENTRY PRICE</span>
-                <strong id="recEntry">0000.00</strong>
-                <button class="copy-btn" onclick="copyText('recEntry')">SALIN</button>
-            </div>
-            <div class="helper-row">
-                <span>STOP LOSS (MAKS 60c)</span>
-                <strong id="recSL" style="color: var(--neon-red);">0000.00</strong>
-                <button class="copy-btn" onclick="copyText('recSL')">SALIN</button>
-            </div>
-            <div class="helper-row">
-                <span>TAKE PROFIT (+120c)</span>
-                <strong id="recTP" style="color: var(--neon-green);">0000.00</strong>
-                <button class="copy-btn" onclick="copyText('recTP')">SALIN</button>
+            <div style="font-size: 0.68rem; color: #cbd5e1; line-height: 1.5;">
+                Tunggu harga masuk ke zon makro di bawah $\rightarrow$ sauk pesanan guna pengesahan lilin M1 $\rightarrow$ bila untung $+20\text{ pips}$, alih Stop Loss ke Breakeven (BE+1). Posisi anda kini bebas risiko untuk dipegang selama berminggu-minggu!
             </div>
         </div>
 
-        <div class="card-box" style="border-left: 4px solid var(--neon-cyan);">
+        <!-- Zon 1: Swing Jual (Siling Bulanan) -->
+        <div class="kad-zon-swing" style="border-left: 4px solid var(--merah-neon);">
+            <div class="kepala-swing">
+                <span class="jenis-swing" style="color: var(--merah-neon);">ZON SWING JUAL (1-2 MINGGU)</span>
+                <span class="status-swing" id="statusSwingJual" style="background: rgba(244,63,94,0.15); color: var(--merah-neon);">JAUH</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin: 4px 0;">
+                <span style="font-size: 0.7rem; color: var(--teks-kelabu);">Zon Institusi:</span>
+                <strong style="font-size: 1.1rem; color: #fff;">4075.00 — 4100.00</strong>
+            </div>
+            <div style="font-size: 0.68rem; color: var(--teks-kelabu); line-height: 1.4;">
+                🎯 <strong>Sasaran Untung (TP):</strong> 4000.00 (+700 pips)<br>
+                🛑 <strong>Stop Loss M1:</strong> 6 pips atas pucuk lilin pengesahan<br>
+                📏 <strong>Jarak ke Zon:</strong> <span id="jarakSwingJual" style="color: var(--emas-neon);">-- mata</span>
+            </div>
+        </div>
+
+        <!-- Zon 2: Swing Beli (Lantai Bulanan) -->
+        <div class="kad-zon-swing" style="border-left: 4px solid var(--hijau-neon);">
+            <div class="kepala-swing">
+                <span class="jenis-swing" style="color: var(--hijau-neon);">ZON SWING BELI (2-4 MINGGU)</span>
+                <span class="status-swing" id="statusSwingBeli" style="background: rgba(16,185,129,0.15); color: var(--hijau-neon);">JAUH</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin: 4px 0;">
+                <span style="font-size: 0.7rem; color: var(--teks-kelabu);">Zon Institusi:</span>
+                <strong style="font-size: 1.1rem; color: #fff;">3960.00 — 3985.00</strong>
+            </div>
+            <div style="font-size: 0.68rem; color: var(--teks-kelabu); line-height: 1.4;">
+                🎯 <strong>Sasaran Untung (TP):</strong> 4080.00 (+1000 pips)<br>
+                🛑 <strong>Stop Loss M1:</strong> 6 pips bawah lantai lilin pengesahan<br>
+                📏 <strong>Jarak ke Zon:</strong> <span id="jarakSwingBeli" style="color: var(--emas-neon);">-- mata</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 3: PEMBANTU PESANAN MT5 -->
+    <div id="tab-pesanan" class="panel-tab">
+        <div class="kad-kotak">
+            <div style="font-size: 0.72rem; font-weight: 900; color: var(--emas-neon); margin-bottom: 8px;">
+                PANDUAN PESANAN MT5 (0.01 LOT SAHAJA)
+            </div>
+            <div class="baris-pembantu">
+                <span>CADANGAN TINDAKAN</span>
+                <strong id="cadanganTindakan" style="color: var(--sian-neon);">TUNGGU SETUP</strong>
+            </div>
+            <div class="baris-pembantu">
+                <span>HARGA ENTRY</span>
+                <strong id="cadanganEntry">0000.00</strong>
+                <button class="butang-salin" onclick="salinTeks('cadanganEntry')">SALIN</button>
+            </div>
+            <div class="baris-pembantu">
+                <span>STOP LOSS (HAD RUGI 60c)</span>
+                <strong id="cadanganSL" style="color: var(--merah-neon);">0000.00</strong>
+                <button class="butang-salin" onclick="salinTeks('cadanganSL')">SALIN</button>
+            </div>
+            <div class="baris-pembantu">
+                <span>TAKE PROFIT (MINIMA +120c)</span>
+                <strong id="cadanganTP" style="color: var(--hijau-neon);">0000.00</strong>
+                <button class="butang-salin" onclick="salinTeks('cadanganTP')">SALIN</button>
+            </div>
+        </div>
+
+        <div class="kad-kotak" style="border-left: 4px solid var(--sian-neon);">
             <div style="font-size: 0.7rem; color: #cbd5e1; line-height: 1.5;">
-                💡 <strong>Disiplin 300 Sen:</strong> Tekan butang <strong>SALIN</strong> untuk paras SL dan TP, kemudian tampal terus di aplikasi MT5 telefon sebelum tekan Buy/Sell.
+                💡 <strong>Disiplin Modal 300 Sen:</strong> Tekan butang <strong>SALIN</strong> untuk paras SL dan TP, kemudian tampal terus di skrin pesanan MT5 sebelum menekan Buy atau Sell.
             </div>
         </div>
     </div>
 
-    <!-- TAB 3: TELEGRAM SETTINGS & NOTIFICATIONS -->
-    <div id="tab-telegram" class="tab-panel">
-        <div class="card-box">
-            <div style="font-size: 0.72rem; font-weight: 900; color: var(--neon-cyan); margin-bottom: 6px;">
-                KAWALAN NOTIFIKASI TELEGRAM
+    <!-- TAB 4: KAWALAN NOTIFIKASI TELEGRAM -->
+    <div id="tab-telegram" class="panel-tab">
+        <div class="kad-kotak">
+            <div style="font-size: 0.72rem; font-weight: 900; color: var(--sian-neon); margin-bottom: 6px;">
+                SUIS AMARAN TELEGRAM
             </div>
             
-            <div class="toggle-row">
-                <span>Notifikasi Buy / Sell Scalp</span>
-                <input type="checkbox" id="tgSignalToggle" checked style="accent-color: var(--neon-lime); transform: scale(1.2);">
+            <div class="baris-suis">
+                <span>Isyarat Scalp M1 (Buy/Sell)</span>
+                <input type="checkbox" id="suisIsyaratTG" checked style="accent-color: var(--hijau-pucuk); transform: scale(1.2);">
             </div>
-            <div class="toggle-row">
-                <span>Amaran V/A SnR Baru</span>
-                <input type="checkbox" id="tgSnrToggle" checked style="accent-color: var(--neon-lime); transform: scale(1.2);">
+            <div class="baris-suis">
+                <span>Amaran Zon Makro Swing (HTF)</span>
+                <input type="checkbox" id="suisSwingTG" checked style="accent-color: var(--ungu-neon); transform: scale(1.2);">
             </div>
-            <div class="toggle-row">
+            <div class="baris-suis">
                 <span>Peringatan Auto-BE (+5 Pips)</span>
-                <input type="checkbox" id="tgBeToggle" checked style="accent-color: var(--neon-lime); transform: scale(1.2);">
+                <input type="checkbox" id="suisBeTG" checked style="accent-color: var(--hijau-pucuk); transform: scale(1.2);">
             </div>
-            <div class="toggle-row">
+            <div class="baris-suis">
                 <span>Amaran Had Cut-Loss (-6 Pips)</span>
-                <input type="checkbox" id="tgClToggle" checked style="accent-color: var(--neon-red); transform: scale(1.2);">
+                <input type="checkbox" id="suisClTG" checked style="accent-color: var(--merah-neon); transform: scale(1.2);">
             </div>
         </div>
 
-        <div class="card-box">
-            <div class="field-group">
-                <label>Telegram Bot Token</label>
-                <input type="text" id="tgTokenInput" value="8758186965:AAFh3ULj2ui5Yooewlkj7EkgG8sZQK4VQpA">
+        <div class="kad-kotak">
+            <div class="ruang-input">
+                <label>Token Bot Telegram</label>
+                <input type="text" id="inputTokenTG" value="8758186965:AAFh3ULj2ui5Yooewlkj7EkgG8sZQK4VQpA">
             </div>
-            <div class="field-group">
-                <label>Telegram Chat ID</label>
-                <input type="text" id="tgChatIdInput" value="693517031">
+            <div class="ruang-input">
+                <label>ID Chat Telegram</label>
+                <input type="text" id="inputIdChatTG" value="693517031">
             </div>
-            <button class="btn-full btn-lime" onclick="saveTelegramConfig()">SIMPAN KREDENSIAL TELEGRAM</button>
-            <button class="btn-full btn-tg" onclick="openTelegramApp()">BUKA APLIKASI TELEGRAM</button>
+            <button class="butang-penuh butang-hijau" onclick="simpanKredensialTelegram()">SIMPAN KREDENSIAL TELEGRAM</button>
+            <button class="butang-penuh butang-telegram" onclick="bukaAplikasiTelegram()">BUKA APLIKASI TELEGRAM</button>
         </div>
     </div>
 
-    <!-- TAB 4: CONFIG & TUNING (PRESET SIANG / MALAM) -->
-    <div id="tab-config" class="tab-panel">
-        <div class="session-toggle-box">
-            <button class="session-btn" id="btnSiang" onclick="applyPreset('siang')">
+    <!-- TAB 5: TETAPAN & PELARASAN ALGORITMA -->
+    <div id="tab-tetapan" class="panel-tab">
+        <!-- Pilihan Sesi Pantas -->
+        <div class="kotak-pilih-sesi">
+            <button class="butang-sesi" id="butangSiang" onclick="tetapkanSesi('siang')">
                 ☀️ SIANG<br><span style="font-size: 0.6rem;">RSI 80 / 20</span>
             </button>
-            <button class="session-btn selected" id="btnMalam" onclick="applyPreset('malam')">
+            <button class="butang-sesi dipilih" id="butangMalam" onclick="tetapkanSesi('malam')">
                 🌙 MALAM<br><span style="font-size: 0.6rem;">RSI 85 / 15</span>
             </button>
         </div>
 
-        <div class="field-group">
-            <label>RSI Overbought (Sell Trigger)</label>
+        <div class="ruang-input">
+            <label>RSI Overbought (Pemicu Jual / Sell)</label>
             <input type="number" id="inputOB" value="85">
         </div>
-        <div class="field-group">
-            <label>RSI Oversold (Buy Trigger)</label>
+        <div class="ruang-input">
+            <label>RSI Oversold (Pemicu Beli / Buy)</label>
             <input type="number" id="inputOS" value="15">
         </div>
-        <div class="field-group">
-            <label>Auto Cut-Loss Hard Limit ($ / Cent)</label>
+        <div class="ruang-input">
+            <label>Had Maksimum Cut-Loss (Sen / USD)</label>
             <input type="number" id="inputCL" value="80.00">
         </div>
-        <div class="field-group">
-            <label>Basket Trailing Start (Pips)</label>
-            <input type="number" id="inputTrail" value="8.0">
-        </div>
 
-        <button class="btn-full btn-lime" onclick="saveTuning()">SIMPAN & TERAPKAN LOGIK</button>
+        <div style="display: flex; gap: 8px;">
+            <button class="butang-penuh butang-reset" onclick="pulihkanTetapanAsal()">TETAPAN ASAL</button>
+            <button class="butang-penuh butang-hijau" onclick="simpanTetapanAlgoritma()">SIMPAN & TERAPKAN</button>
+        </div>
     </div>
 
     <script>
-        // Default Stored Credentials
         let TG_TOKEN = localStorage.getItem("TG_TOKEN") || "8758186965:AAFh3ULj2ui5Yooewlkj7EkgG8sZQK4VQpA";
         let TG_CHAT_ID = localStorage.getItem("TG_CHAT_ID") || "693517031";
 
-        let prices = [];
+        let rekodHarga = [];
         let rsiOB = 85.0;
         let rsiOS = 15.0;
-        let cooldown = false;
-        let sharpSupport = 4005.00;
-        let sharpResistance = 4030.00;
+        let bertenangIsyarat = false;
+        let bertenangSwing = false;
+        let nilaiSokongan = 4005.00;
+        let nilaiRintangan = 4030.00;
 
-        // Position Tracking for Follow-up Alerts
-        let activeSignal = null;
-        let signalEntryPrice = 0.0;
-        let beAlertSent = false;
-        let clAlertSent = false;
+        // Had Zon Makro Swing
+        const ZON_SWING_JUAL_MIN = 4075.00;
+        const ZON_SWING_JUAL_MAKS = 4100.00;
+        const ZON_SWING_BELI_MIN = 3960.00;
+        const ZON_SWING_BELI_MAKS = 3985.00;
 
-        function switchTab(tabId, btn) {
-            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.tab-item').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
+        let isyaratAktif = null;
+        let hargaEntryTerkini = 0.0;
+        let amaranBeTelahDihantar = false;
+        let amaranClTelahDihantar = false;
+
+        function tukarTab(idTab, butang) {
+            document.querySelectorAll('.panel-tab').forEach(p => p.classList.remove('aktif'));
+            document.querySelectorAll('.butang-tab').forEach(b => b.classList.remove('aktif'));
+            document.getElementById(idTab).classList.add('aktif');
+            butang.classList.add('aktif');
         }
 
-        function writeLog(text, type = "normal") {
-            const logs = document.getElementById('consoleLogs');
-            const now = new Date();
-            const time = `[ ${now.toTimeString().split(' ')[0]} ]`;
-            let row = `<div><span class="c-time">${time}</span> > ${text}</div>`;
-            if (type === "exec") row = `<div><span class="c-time">${time}</span> > <span class="c-exec">${text}</span></div>`;
-            if (type === "alert") row = `<div><span class="c-time">${time}</span> > <span class="c-alert">${text}</span></div>`;
-            if (type === "sync") row = `<div><span class="c-time">${time}</span> > <span class="c-sync">${text}</span></div>`;
-            logs.innerHTML += row;
-            logs.scrollTop = logs.scrollHeight;
+        function tulisLog(teks, jenis = "biasa") {
+            const konsol = document.getElementById('logKonsol');
+            const masa = new Date();
+            const formatMasa = `[ ${masa.toTimeString().split(' ')[0]} ]`;
+            let baris = `<div><span class="masa-log">${formatMasa}</span> > ${teks}</div>`;
+            if (jenis === "laksana") baris = `<div><span class="masa-log">${formatMasa}</span> > <span class="log-laksana">${teks}</span></div>`;
+            if (jenis === "amaran") baris = `<div><span class="masa-log">${formatMasa}</span> > <span class="log-amaran">${teks}</span></div>`;
+            if (jenis === "selaras") baris = `<div><span class="masa-log">${formatMasa}</span> > <span class="log-selaras">${teks}</span></div>`;
+            konsol.innerHTML += baris;
+            konsol.scrollTop = konsol.scrollHeight;
         }
 
-        function playAlertSound(isEmergency = false) {
+        function bunyikanAmaran(kecemasan = false) {
             try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.type = isEmergency ? "sawtooth" : "sine";
-                osc.frequency.setValueAtTime(isEmergency ? 440 : 880, ctx.currentTime);
-                gain.gain.setValueAtTime(0.2, ctx.currentTime);
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.start();
-                osc.stop(ctx.currentTime + (isEmergency ? 0.6 : 0.25));
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osilator = audioCtx.createOscillator();
+                const penguat = audioCtx.createGain();
+                osilator.type = kecemasan ? "sawtooth" : "sine";
+                osilator.frequency.setValueAtTime(kecemasan ? 440 : 880, audioCtx.currentTime);
+                penguat.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                osilator.connect(penguat);
+                penguat.connect(audioCtx.destination);
+                osilator.start();
+                osilator.stop(audioCtx.currentTime + (kecemasan ? 0.6 : 0.25));
             } catch(e) {}
         }
 
-        function calcRSI(data, period = 5) {
-            if (data.length < period + 1) return 50.0;
-            let gains = 0, losses = 0;
-            for (let i = 1; i <= period; i++) {
-                let diff = data[i] - data[i - 1];
-                if (diff >= 0) gains += diff;
-                else losses -= diff;
+        function kiraRSI(data, tempoh = 5) {
+            if (data.length < tempoh + 1) return 50.0;
+            let untung = 0, rugi = 0;
+            for (let i = 1; i <= tempoh; i++) {
+                let beza = data[i] - data[i - 1];
+                if (beza >= 0) untung += beza;
+                else rugi -= beza;
             }
-            if (losses === 0) return 100.0;
-            let rs = (gains / period) / (losses / period);
+            if (rugi === 0) return 100.0;
+            let rs = (untung / tempoh) / (rugi / tempoh);
             return 100 - (100 / (1 + rs));
         }
 
-        function calcEMA(data, period = 20) {
+        function kiraEMA(data, tempoh = 20) {
             if (data.length === 0) return 0;
-            let k = 2 / (period + 1);
+            let pendarab = 2 / (tempoh + 1);
             let ema = data[0];
             for (let i = 1; i < data.length; i++) {
-                ema = (data[i] * k) + (ema * (1 - k));
+                ema = (data[i] * pendarab) + (ema * (1 - pendarab));
             }
             return ema;
         }
 
-        // Core Dispatcher Function
-        async function dispatchTelegramMessage(messageText) {
-            const tgStatus = document.getElementById('tgStatus');
+        async function hantarMesejTelegram(teksMesej) {
+            const lencanaTG = document.getElementById('statusTG');
             try {
-                tgStatus.innerText = "TG: SENDING...";
-                const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+                lencanaTG.innerText = "TG: MENGHANTAR...";
+                const jawapan = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         chat_id: TG_CHAT_ID,
-                        text: messageText,
+                        text: teksMesej,
                         parse_mode: 'Markdown'
                     })
                 });
-                const data = await res.json();
-                if (data.ok) {
-                    tgStatus.innerText = "TG: SENT OK";
-                    setTimeout(() => { tgStatus.innerText = "TG: STANDBY"; }, 4000);
+                const keputusan = await jawapan.json();
+                if (keputusan.ok) {
+                    lencanaTG.innerText = "TG: BERJAYA";
+                    setTimeout(() => { lencanaTG.innerText = "TG: BERSIDIA"; }, 4000);
                     return true;
                 } else {
-                    tgStatus.innerText = "TG: ERR";
+                    lencanaTG.innerText = "TG: RALAT";
                     return false;
                 }
-            } catch (err) {
-                tgStatus.innerText = "TG: NET ERR";
+            } catch (ralat) {
+                lencanaTG.innerText = "TG: TIADA TALIAN";
                 return false;
             }
         }
 
-        function connectFeed() {
-            const socket = new WebSocket("wss://stream.binance.com:9443/ws/paxgusdt@ticker");
+        function sambungSuapanPasaran() {
+            const soket = new WebSocket("wss://stream.binance.com:9443/ws/paxgusdt@ticker");
 
-            socket.onopen = () => {
-                document.getElementById('livePill').innerText = "ONLINE";
-                writeLog("MARKET FEED: ONLINE (0ms)", "sync");
+            soket.onopen = () => {
+                document.getElementById('statusSuapan').innerText = "SIARAN: AKTIF";
+                tulisLog("SUAPAN HARGA: TERSAMBUNG SECARA LANGSUNG (0ms)", "selaras");
             };
 
-            socket.onmessage = (event) => {
-                const payload = JSON.parse(event.data);
-                const cmp = parseFloat(payload.c);
-                document.getElementById('cmpDisplay').innerText = cmp.toFixed(2);
+            soket.onmessage = (peristiwa) => {
+                const data = JSON.parse(peristiwa.data);
+                const hargaSemasa = parseFloat(data.c);
+                document.getElementById('paparanHarga').innerText = hargaSemasa.toFixed(2);
 
-                prices.push(cmp);
-                if (prices.length > 35) prices.shift();
+                rekodHarga.push(hargaSemasa);
+                if (rekodHarga.length > 35) rekodHarga.shift();
 
-                const rsi = calcRSI(prices, 5);
-                const ema = calcEMA(prices, 20);
-                document.getElementById('m1SubLabel').innerText = `RSI(5): ${rsi.toFixed(1)} | EMA(20): ${ema.toFixed(2)}`;
+                const rsi = kiraRSI(rekodHarga, 5);
+                const ema = kiraEMA(rekodHarga, 20);
+                document.getElementById('labelSubM1').innerText = `RSI(5): ${rsi.toFixed(1)} | EMA(20): ${ema.toFixed(2)}`;
 
-                // SnR Sharp V & A Detection
-                if (prices.length >= 6) {
-                    let p2 = prices[prices.length - 3];
-                    let p1 = prices[prices.length - 2];
-                    let p0 = prices[prices.length - 1];
+                // Pengesanan Struktur V & A Tajam
+                if (rekodHarga.length >= 6) {
+                    let p2 = rekodHarga[rekodHarga.length - 3];
+                    let p1 = rekodHarga[rekodHarga.length - 2];
+                    let p0 = rekodHarga[rekodHarga.length - 1];
 
-                    // Sharp A (Resistance)
+                    // 'A' Tajam (Rintangan)
                     if (p1 > p2 && p1 > p0 && (p1 - p0) >= 0.45) {
-                        if (Math.abs(p1 - sharpResistance) >= 0.50) {
-                            sharpResistance = p1;
-                            document.getElementById('sharpAVal').innerText = sharpResistance.toFixed(2);
-                            writeLog(`NEW SHARP 'A' (RESISTANCE): ${sharpResistance.toFixed(2)}`, "alert");
-                            if (document.getElementById('tgSnrToggle').checked) {
-                                dispatchSnrAlert("A_RESISTANCE", sharpResistance);
-                            }
+                        if (Math.abs(p1 - nilaiRintangan) >= 0.50) {
+                            nilaiRintangan = p1;
+                            document.getElementById('nilaiRintanganA').innerText = nilaiRintangan.toFixed(2);
                         }
                     }
 
-                    // Sharp V (Support)
+                    // 'V' Tajam (Sokongan)
                     if (p1 < p2 && p1 < p0 && (p0 - p1) >= 0.45) {
-                        if (Math.abs(p1 - sharpSupport) >= 0.50) {
-                            sharpSupport = p1;
-                            document.getElementById('sharpVVal').innerText = sharpSupport.toFixed(2);
-                            writeLog(`NEW SHARP 'V' (SUPPORT): ${sharpSupport.toFixed(2)}`, "sync");
-                            if (document.getElementById('tgSnrToggle').checked) {
-                                dispatchSnrAlert("V_SUPPORT", sharpSupport);
-                            }
+                        if (Math.abs(p1 - nilaiSokongan) >= 0.50) {
+                            nilaiSokongan = p1;
+                            document.getElementById('nilaiSokonganV').innerText = nilaiSokongan.toFixed(2);
                         }
                     }
                 }
 
-                // Strategy Validation Status
-                const statusEl = document.getElementById('statusSignal');
-                if (cmp > ema && rsi <= rsiOS) {
-                    statusEl.innerText = "BUY VALID (V-PULLBACK)";
-                    statusEl.style.color = "var(--neon-green)";
-                    updateOrderHelper("BUY", cmp, cmp - 6.0, cmp + 12.0);
-                    if (document.getElementById('tgSignalToggle').checked) {
-                        dispatchSignalAlert("BUY", cmp, rsi);
+                // Pantau Jarak ke Zon Makro Swing
+                semakZonSwing(hargaSemasa);
+
+                // Pengesanan Isyarat Scalp M1
+                const elemenStatus = document.getElementById('statusIsyarat');
+                if (hargaSemasa > ema && rsi <= rsiOS) {
+                    elemenStatus.innerText = "SAH BUY (LANTUNAN V)";
+                    elemenStatus.style.color = "var(--hijau-neon)";
+                    kemasKiniPembantuPesanan("BUY", hargaSemasa, hargaSemasa - 6.0, hargaSemasa + 12.0);
+                    if (document.getElementById('suisIsyaratTG').checked) {
+                        lepaskanIsyaratScalp("BUY", hargaSemasa, rsi);
                     }
-                } else if (cmp < ema && rsi >= rsiOB) {
-                    statusEl.innerText = "SELL VALID (A-PULLBACK)";
-                    statusEl.style.color = "var(--neon-red)";
-                    updateOrderHelper("SELL", cmp, cmp + 6.0, cmp - 12.0);
-                    if (document.getElementById('tgSignalToggle').checked) {
-                        dispatchSignalAlert("SELL", cmp, rsi);
+                } else if (hargaSemasa < ema && rsi >= rsiOB) {
+                    elemenStatus.innerText = "SAH SELL (LANTUNAN A)";
+                    elemenStatus.style.color = "var(--merah-neon)";
+                    kemasKiniPembantuPesanan("SELL", hargaSemasa, hargaSemasa + 6.0, hargaSemasa - 12.0);
+                    if (document.getElementById('suisIsyaratTG').checked) {
+                        lepaskanIsyaratScalp("SELL", hargaSemasa, rsi);
                     }
                 } else {
-                    statusEl.innerText = "WAITING VALID SETUP";
-                    statusEl.style.color = "var(--text-muted)";
+                    elemenStatus.innerText = "MENUNGGU SETUP";
+                    elemenStatus.style.color = "var(--teks-kelabu)";
                 }
 
-                // Follow-up Position Monitoring (Auto-BE & Cut-Loss Warnings)
-                checkPositionProgress(cmp);
+                pantauPerkembanganPosisi(hargaSemasa);
             };
 
-            socket.onerror = () => {
-                document.getElementById('livePill').innerText = "RETRYING";
+            soket.onerror = () => {
+                document.getElementById('statusSuapan').innerText = "MENYAMBUNG SEMULA";
             };
         }
 
-        function updateOrderHelper(action, entry, sl, tp) {
-            document.getElementById('recAction').innerText = action;
-            document.getElementById('recAction').style.color = action === "BUY" ? "var(--neon-green)" : "var(--neon-red)";
-            document.getElementById('recEntry').innerText = entry.toFixed(2);
-            document.getElementById('recSL').innerText = sl.toFixed(2);
-            document.getElementById('recTP').innerText = tp.toFixed(2);
+        function semakZonSwing(harga) {
+            const jarakJual = (ZON_SWING_JUAL_MIN - harga).toFixed(1);
+            const jarakBeli = (harga - ZON_SWING_BELI_MAKS).toFixed(1);
+
+            document.getElementById('jarakSwingJual').innerText = `${jarakJual} mata`;
+            document.getElementById('jarakSwingBeli').innerText = `${jarakBeli} mata`;
+
+            const statusJual = document.getElementById('statusSwingJual');
+            const statusBeli = document.getElementById('statusSwingBeli');
+
+            // Masuk Zon Swing Jual (4075 - 4100)
+            if (harga >= ZON_SWING_JUAL_MIN && harga <= ZON_SWING_JUAL_MAKS) {
+                statusJual.innerText = "DALAM ZON!";
+                statusJual.style.background = "rgba(244,63,94,0.3)";
+                statusJual.style.color = "#fff";
+                if (document.getElementById('suisSwingTG').checked && !bertenangSwing) {
+                    lepaskanAmaranSwing("SELL", harga, ZON_SWING_JUAL_MIN, ZON_SWING_JUAL_MAKS, 4000.00);
+                }
+            } else {
+                statusJual.innerText = harga > ZON_SWING_JUAL_MAKS ? "PECAH SILING" : "JAUH";
+                statusJual.style.background = "rgba(244,63,94,0.15)";
+                statusJual.style.color = "var(--merah-neon)";
+            }
+
+            // Masuk Zon Swing Beli (3960 - 3985)
+            if (harga >= ZON_SWING_BELI_MIN && harga <= ZON_SWING_BELI_MAKS) {
+                statusBeli.innerText = "DALAM ZON!";
+                statusBeli.style.background = "rgba(16,185,129,0.3)";
+                statusBeli.style.color = "#fff";
+                if (document.getElementById('suisSwingTG').checked && !bertenangSwing) {
+                    lepaskanAmaranSwing("BUY", harga, ZON_SWING_BELI_MIN, ZON_SWING_BELI_MAKS, 4080.00);
+                }
+            } else {
+                statusBeli.innerText = harga < ZON_SWING_BELI_MIN ? "PECAH LANTAI" : "JAUH";
+                statusBeli.style.background = "rgba(16,185,129,0.15)";
+                statusBeli.style.color = "var(--hijau-neon)";
+            }
         }
 
-        async function dispatchSignalAlert(type, price, rsi) {
-            if (cooldown) return;
-            cooldown = true;
-            playAlertSound(false);
-            if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+        async function lepaskanAmaranSwing(tindakan, harga, zonBawah, zonAtas, sasaranTP) {
+            bertenangSwing = true;
+            bunyikanAmaran(false);
+            if (navigator.vibrate) navigator.vibrate([300, 150, 300]);
 
-            // Save active signal for progress tracking
-            activeSignal = type;
-            signalEntryPrice = price;
-            beAlertSent = false;
-            clAlertSent = false;
+            tulisLog(`AMARAN AYUNAN: ZON MAKRO ${tindakan} DICAPAI @ ${harga.toFixed(2)}`, "laksana");
 
-            writeLog(`TRIGGER: ${type} @ ${price.toFixed(2)} (RSI: ${rsi.toFixed(1)})`, "exec");
-
-            const slPrice = type === "BUY" ? (price - 6.0).toFixed(2) : (price + 6.0).toFixed(2);
-            const tpPrice = type === "BUY" ? (price + 12.0).toFixed(2) : (price - 12.0).toFixed(2);
-
-            const msg = 
-                `⚡ *ZS-X CLUSTER TRIGGER: ${type} SCALP!* ⚡\n` +
+            const pesanan = 
+                `🏛️ *AMARAN ZON MAKRO AYUNAN: ${tindakan} (HOLD SEMINGGU / SEBULAN)!* 🏛️\n` +
                 `━━━━━━━━━━━━━━━━━━━━\n` +
-                `💰 *Price:* \`${price.toFixed(2)}\`\n` +
-                `📊 *M1 RSI(5):* \`${rsi.toFixed(1)}\`\n` +
-                `🎯 *SnR Ref:* V: \`${sharpSupport.toFixed(2)}\` | A: \`${sharpResistance.toFixed(2)}\`\n` +
-                `🛡️ *Strict Lot:* \`0.01 ONLY\`\n` +
-                `🛑 *Hard SL:* \`${slPrice}\` (Maks 6 pts / 60c)\n` +
-                `🎯 *Target TP:* \`${tpPrice}\` (+12 pts / 120c)\n` +
+                `💰 *Harga Semasa:* \`${harga.toFixed(2)}\`\n` +
+                `🎯 *Zon Siling/Lantai:* \`${zonBawah.toFixed(2)} — ${zonAtas.toFixed(2)}\`\n` +
+                `🛡️ *Saiz Lot Wajib:* \`0.01 SAHAJA\` (Modal 300 sen)\n` +
+                `🛑 *Stop Loss M1:* 6 pips sahaja (sauk entry guna lilin M1)\n` +
+                `🎯 *Sasaran Untung:* \`${sasaranTP.toFixed(2)}\` (+700 hingga +1000 pips!)\n` +
                 `━━━━━━━━━━━━━━━━━━━━\n` +
-                `📱 _Buka MT5 telefon & salin parameter sekarang!_`;
+                `💡 *SOP SCALP-TO-SWING:* Bila untung cecah +20 pips, alih SL ke Breakeven (BE+1). Posisi kini selamat dan boleh dibiarkan jalan berminggu-minggu tanpa risiko modal!`;
 
-            await dispatchTelegramMessage(msg);
-            setTimeout(() => { cooldown = false; }, 90000); // 90s cooldown
+            await hantarMesejTelegram(pesanan);
+            setTimeout(() => { bertenangSwing = false; }, 600000); // Bertenang 10 minit
         }
 
-        async function dispatchSnrAlert(snrType, level) {
-            const isV = snrType === "V_SUPPORT";
-            const icon = isV ? "🟢" : "🔴";
-            const label = isV ? "SHARP 'V' (TAPAK SOKONGAN)" : "SHARP 'A' (SILING RINTANGAN)";
-
-            const msg = 
-                `${icon} *STRUKTUR BARU DIKESAN: ${label}*\n` +
-                `━━━━━━━━━━━━━━━━━━━━\n` +
-                `🎯 *Paras Harga:* \`${level.toFixed(2)}\`\n` +
-                `⏱️ *Timeframe:* M1 Spot Gold\n` +
-                `💡 *Nota:* Pantau rejection apabila harga mendekati zon ini.`;
-
-            await dispatchTelegramMessage(msg);
+        function kemasKiniPembantuPesanan(tindakan, entry, sl, tp) {
+            document.getElementById('cadanganTindakan').innerText = tindakan;
+            document.getElementById('cadanganTindakan').style.color = tindakan === "BUY" ? "var(--hijau-neon)" : "var(--merah-neon)";
+            document.getElementById('cadanganEntry').innerText = entry.toFixed(2);
+            document.getElementById('cadanganSL').innerText = sl.toFixed(2);
+            document.getElementById('cadanganTP').innerText = tp.toFixed(2);
         }
 
-        async function checkPositionProgress(cmp) {
-            if (!activeSignal || signalEntryPrice === 0) return;
+        async function lepaskanIsyaratScalp(jenis, harga, rsi) {
+            if (bertenangIsyarat) return;
+            bertenangIsyarat = true;
+            bunyikanAmaran(false);
 
-            const isBuy = activeSignal === "BUY";
-            const gainPips = isBuy ? (cmp - signalEntryPrice) : (signalEntryPrice - cmp);
+            isyaratAktif = jenis;
+            hargaEntryTerkini = harga;
+            amaranBeTelahDihantar = false;
+            amaranClTelahDihantar = false;
 
-            // 1. Peringatan Auto-BE (+5 Pips)
-            if (gainPips >= 5.0 && !beAlertSent && document.getElementById('tgBeToggle').checked) {
-                beAlertSent = true;
-                playAlertSound(false);
-                const msg = 
+            tulisLog(`PICU ENTRY: ${jenis} @ ${harga.toFixed(2)} (RSI: ${rsi.toFixed(1)})`, "laksana");
+
+            const parasSL = jenis === "BUY" ? (harga - 6.0).toFixed(2) : (harga + 6.0).toFixed(2);
+            const parasTP = jenis === "BUY" ? (harga + 12.0).toFixed(2) : (harga - 12.0).toFixed(2);
+
+            const pesanan = 
+                `⚡ *PICUAN RADAR ZS-X: ${jenis} SCALP!* ⚡\n` +
+                `━━━━━━━━━━━━━━━━━━━━\n` +
+                `💰 *Harga:* \`${harga.toFixed(2)}\`\n` +
+                `📊 *RSI(5) M1:* \`${rsi.toFixed(1)}\`\n` +
+                `🛡️ *Saiz Lot:* \`0.01 SAHAJA\`\n` +
+                `🛑 *Stop Loss:* \`${parasSL}\` (Maks 60 sen)\n` +
+                `🎯 *Take Profit:* \`${parasTP}\` (+120 sen)\n` +
+                `━━━━━━━━━━━━━━━━━━━━\n` +
+                `📱 _Buka MT5 telefon anda sekarang untuk salin nilai pesanan!_`;
+
+            await hantarMesejTelegram(pesanan);
+            setTimeout(() => { bertenangIsyarat = false; }, 90000); // Bertenang 90 saat
+        }
+
+        async function pantauPerkembanganPosisi(harga) {
+            if (!isyaratAktif || hargaEntryTerkini === 0) return;
+
+            const isBuy = isyaratAktif === "BUY";
+            const jarakUntungPips = isBuy ? (harga - hargaEntryTerkini) : (hargaEntryTerkini - harga);
+
+            // 1. Peringatan Alih ke Breakeven (+5 pips)
+            if (jarakUntungPips >= 5.0 && !amaranBeTelahDihantar && document.getElementById('suisBeTG').checked) {
+                amaranBeTelahDihantar = true;
+                bunyikanAmaran(false);
+                const mesej = 
                     `🛡️ *PERINGATAN AUTO-BE: ALIH SL SEKARANG!* 🛡️\n` +
                     `━━━━━━━━━━━━━━━━━━━━\n` +
-                    `📈 Posisi *${activeSignal}* anda sudah untung *+${gainPips.toFixed(1)} pips*!\n` +
-                    `🔒 *Tindakan Wajib:* Alih Stop Loss ke harga Entry (\`${signalEntryPrice.toFixed(2)}\`) di MT5.\n` +
-                    `✨ Risiko akaun kini disekat ke SIFAR (Free Trade)!`;
-                await dispatchTelegramMessage(msg);
-                writeLog(`BE REMINDER DISPATCHED (+${gainPips.toFixed(1)} pips)`, "sync");
+                    `📈 Posisi *${isyaratAktif}* anda sudah untung *+${jarakUntungPips.toFixed(1)} pips*!\n` +
+                    `🔒 *Tindakan Wajib:* Alih Stop Loss ke harga Entry (\`${hargaEntryTerkini.toFixed(2)}\`) di MT5 sekarang.\n` +
+                    `✨ Risiko akaun anda kini SIFAR! (Boleh biarkan jalan untuk swing).`;
+                await hantarMesejTelegram(mesej);
             }
 
-            // 2. Amaran Had Cut-Loss (-6 Pips)
-            if (gainPips <= -6.0 && !clAlertSent && document.getElementById('tgClToggle').checked) {
-                clAlertSent = true;
-                playAlertSound(true);
-                const msg = 
+            // 2. Amaran Had Cut-Loss (-6 pips)
+            if (jarakUntungPips <= -6.0 && !amaranClTelahDihantar && document.getElementById('suisClTG').checked) {
+                amaranClTelahDihantar = true;
+                bunyikanAmaran(true);
+                const mesej = 
                     `🚨 *AMARAN CUT-LOSS: RISIKO HAMPIR MAKSIMUM!* 🚨\n` +
                     `━━━━━━━━━━━━━━━━━━━━\n` +
-                    `⚠️ Posisi *${activeSignal}* melawan arah *${gainPips.toFixed(1)} pips*.\n` +
-                    `🛑 Baki akaun anda ialah 300 sen. Sila tutup posisi atau pastikan SL \`${(isBuy ? signalEntryPrice - 6.0 : signalEntryPrice + 6.0).toFixed(2)}\` terpasang!`;
-                await dispatchTelegramMessage(msg);
-                writeLog(`CUT-LOSS WARNING DISPATCHED (${gainPips.toFixed(1)} pips)`, "alert");
+                    `⚠️ Posisi *${isyaratAktif}* sedang melawan arah sebanyak *${jarakUntungPips.toFixed(1)} pips*.\n` +
+                    `🛑 Baki modal anda ialah 300 sen. Sila pastikan Stop Loss dipatuhi!`;
+                await hantarMesejTelegram(mesej);
             }
         }
 
-        async function testTelegramPing() {
-            writeLog("PING: MENGHANTAR PING TELEGRAM...", "sync");
-            playAlertSound(false);
-            const testMsg = 
-                `📱 *ZS-X TELEGRAM DISPATCHER VERIFIED!*\n` +
+        async function hantarUjianPing() {
+            tulisLog("UJIAN: MENGHANTAR PING KE TELEGRAM...", "selaras");
+            bunyikanAmaran(false);
+            const mesejUjian = 
+                `📱 *PAPAN PEMUKA ZS-X AKTIF!*\n` +
                 `━━━━━━━━━━━━━━━━━━━━\n` +
-                `🟢 Status: Papan Pemuka Telefon Berjaya Disambungkan.\n` +
-                `🔔 Amaran: Signal M1, SnR V/A, BE & Cut-loss sedia dipancarkan.`;
-            const ok = await dispatchTelegramMessage(testMsg);
-            if (ok) writeLog("TELEGRAM PING BERJAYA DIHANTAR", "sync");
-            else writeLog("RALAT: SEMAK TOKEN ATAU CHAT ID", "alert");
+                `🟢 Radar M1 Scalp + Swing Makro HTF sedia beroperasi.\n` +
+                `🔔 Semua notifikasi diselaraskan dalam Bahasa Melayu Malaysia.`;
+            const berjaya = await hantarMesejTelegram(mesejUjian);
+            if (berjaya) tulisLog("PING TELEGRAM BERJAYA DITERIMA", "selaras");
+            else tulisLog("RALAT: SEMAK TOKEN ATAU ID CHAT ANDA", "amaran");
         }
 
-        function saveTelegramConfig() {
-            TG_TOKEN = document.getElementById('tgTokenInput').value.trim();
-            TG_CHAT_ID = document.getElementById('tgChatIdInput').value.trim();
+        function simpanKredensialTelegram() {
+            TG_TOKEN = document.getElementById('inputTokenTG').value.trim();
+            TG_CHAT_ID = document.getElementById('inputIdChatTG').value.trim();
             localStorage.setItem("TG_TOKEN", TG_TOKEN);
             localStorage.setItem("TG_CHAT_ID", TG_CHAT_ID);
-            writeLog("KREDENSIAL TELEGRAM DISIMPAN KE STORAN TELEFON", "sync");
+            tulisLog("KREDENSIAL TELEGRAM DISIMPAN KE STORAN TELEFON", "selaras");
             alert("Kredensial Telegram Berjaya Disimpan!");
-            testTelegramPing();
+            hantarUjianPing();
         }
 
-        function openTelegramApp() {
+        function bukaAplikasiTelegram() {
             window.location.href = "tg://resolve?domain=telegram";
         }
 
-        function applyPreset(mode) {
-            if (mode === "siang") {
+        function tetapkanSesi(sesi) {
+            if (sesi === "siang") {
                 document.getElementById('inputOB').value = 80;
                 document.getElementById('inputOS').value = 20;
-                document.getElementById('btnSiang').classList.add('selected');
-                document.getElementById('btnMalam').classList.remove('selected');
-                writeLog("PRESET DITERAPKAN: SIANG (80 / 20)", "sync");
+                document.getElementById('butangSiang').classList.add('dipilih');
+                document.getElementById('butangMalam').classList.remove('dipilih');
+                tulisLog("SESI DITUKAR: SIANG (RSI 80 / 20)", "selaras");
             } else {
                 document.getElementById('inputOB').value = 85;
                 document.getElementById('inputOS').value = 15;
-                document.getElementById('btnMalam').classList.add('selected');
-                document.getElementById('btnSiang').classList.remove('selected');
-                writeLog("PRESET DITERAPKAN: MALAM (85 / 15)", "sync");
+                document.getElementById('butangMalam').classList.add('dipilih');
+                document.getElementById('butangSiang').classList.remove('dipilih');
+                tulisLog("SESI DITUKAR: MALAM (RSI 85 / 15)", "selaras");
             }
-            saveTuning();
+            simpanTetapanAlgoritma();
         }
 
-        function saveTuning() {
+        function pulihkanTetapanAsal() {
+            document.getElementById('inputOB').value = 85;
+            document.getElementById('inputOS').value = 15;
+            document.getElementById('inputCL').value = 80.00;
+            tulisLog("TETAPAN ASAL BERJAYA DIPULIHKAN", "selaras");
+            alert("Tetapan telah dipulihkan kepada nilai asal!");
+        }
+
+        function simpanTetapanAlgoritma() {
             rsiOB = parseFloat(document.getElementById('inputOB').value);
             rsiOS = parseFloat(document.getElementById('inputOS').value);
-            writeLog(`DISIMPAN: RSI OB=${rsiOB} | OS=${rsiOS}`, "exec");
-            alert("TETAPAN LOGIK BERJAYA DISIMPAN");
+            tulisLog(`TETAPAN DISIMPAN: RSI OB=${rsiOB} | OS=${rsiOS}`, "laksana");
+            alert("Tetapan Algoritma Berjaya Disimpan!");
         }
 
-        function copyText(elementId) {
-            const val = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(val);
-            alert("Disalin: " + val);
+        function salinTeks(idElemen) {
+            const nilai = document.getElementById(idElemen).innerText;
+            navigator.clipboard.writeText(nilai);
+            alert("Disalin ke papan keratan: " + nilai);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('tgTokenInput').value = TG_TOKEN;
-            document.getElementById('tgChatIdInput').value = TG_CHAT_ID;
-            connectFeed();
+            document.getElementById('inputTokenTG').value = TG_TOKEN;
+            document.getElementById('inputIdChatTG').value = TG_CHAT_ID;
+            sambungSuapanPasaran();
         });
     </script>
 </body>
